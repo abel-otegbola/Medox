@@ -29,7 +29,7 @@ export default function Header() {
     const menuRef = useOutsideClick(setToggleMenu, false)
 
     return (
-        <div className="flex items-center justify-between sticky md:top-2 top-0 left-0 z-[50] bg-white/[0.8] dark:bg-dark/[0.9] dark:text-gray p-3 md:m-2 md:mx-[10%] md:rounded-full backdrop-blur-sm border border-primary/[0.1] dark:border-primary/[0.09]">
+        <div className="flex items-center justify-between sticky md:top-2 top-0 left-0 z-[50] bg-white/[0.8] dark:bg-dark/[0.9] dark:text-gray md:p-3 p-4 md:m-2 md:mx-[10%] md:rounded-full backdrop-blur-sm border border-primary/[0.1] dark:border-primary/[0.09]">
             <Link href="/" className="md:ml-3">
                 <LogoIcon width={30} />
             </Link>
@@ -45,7 +45,7 @@ export default function Header() {
             <div ref={menuRef} className="flex items-center justify-end gap-6 relative">
                 {
                     !user ?
-                    <Button href="/login" className="-my-2 md:rounded-full shadow">Login</Button>
+                    <Button href="/login" className="-my-2 rounded-full shadow">Login</Button>
                     :
                     <button className="p-2 bg-gray/[0.3] dark:bg-gray/[0.08] rounded-full" onClick={() => setToggleMenu(!toggleMenu)}><User size={16}/></button>
                 }
