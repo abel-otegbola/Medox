@@ -37,7 +37,7 @@ export default function Register() {
                     }
                     {
                         flow === 2 ?
-                        <Button className="text-right" onClick={() => signUp({ ...data })}>Finish</Button>     
+                        <Button className="text-right" onClick={() => signUp(data?.email, data?.password)} >Finish</Button>     
                         : 
                         <Button className="text-right" onClick={() => setFlow(flow + 1)}>Continue</Button>  
                     } 

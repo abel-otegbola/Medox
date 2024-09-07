@@ -1,12 +1,22 @@
 'use client'
 import { useLocalStorage } from "@/customHooks/useLocaStorage";
 import { app } from "../firebase/firebase";
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, User } from "firebase/auth";
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import { Toaster, toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
-export const AuthContext = createContext<any>({});
+type values = {
+    user: User;
+    popup: { type: string, msg: string };
+    loading: boolean;
+    setPopup: (aug0: values["popup"]) => void;
+    signIn: (email: string, password: string) => void; 
+    signUp: (email: string, password: string) => void;
+    logOut: () => void;
+}
+
+export const AuthContext = createContext({} as values);
 
 const auth = getAuth(app)
 
@@ -20,8 +30,7 @@ const AuthProvider = ({ children }: { children: ReactNode}) => {
     const signIn = (email: string, password: string) => {
         setLoading(true)
         signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
+        .then(() => {
             setPopup({ type: "success", msg: "Login Successful" })
             setLoading(false)
             router.push("/dashboard")
@@ -35,8 +44,7 @@ const AuthProvider = ({ children }: { children: ReactNode}) => {
     const signUp = (email: string, password: string) => {
         setLoading(true)
         createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
+        .then(() => {
             setPopup({ type: "success", msg:  "Signup Successful" })
             setLoading(false)
             router.push("/dashboard")

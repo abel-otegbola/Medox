@@ -26,7 +26,7 @@ export default function ProfilePage() {
                 </div>
                 <div className="py-2 mb-4">
                     <div className="">
-                        <Input name="Email" type="email" title="Email" label="Email" error="" value={user?.email} />
+                        <Input name="Email" type="email" title="Email" label="Email" error="" value={user?.email || ""} />
                     </div>
                 </div>
                 <Button>Save changes</Button>

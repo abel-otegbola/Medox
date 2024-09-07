@@ -1,13 +1,13 @@
 'use client'
 import { MagnifyingGlass } from "@phosphor-icons/react";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 
 interface dropdownProps {
     className?: string;
     disabled?: boolean;
     label?: string;
     placeholder?: string;
-    leftIcon?: any;
+    leftIcon?: ReactNode;
 }
 
 export default function Search({ className, disabled, placeholder }: dropdownProps) {

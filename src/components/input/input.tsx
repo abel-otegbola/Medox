@@ -1,7 +1,7 @@
 'use client'
 
 import { Eye, EyeSlash } from "@phosphor-icons/react";
-import { InputHTMLAttributes, useState } from "react";
+import { ReactNode, InputHTMLAttributes, useState } from "react";
 
 interface inputProps extends InputHTMLAttributes<HTMLInputElement> {
     className?: string;
@@ -12,7 +12,7 @@ interface inputProps extends InputHTMLAttributes<HTMLInputElement> {
     value: string | number;
     error: string | undefined;
     placeholder?: string;
-    leftIcon?: any
+    leftIcon?: ReactNode;
 }
 
 export default function Input({ className, disabled, label, name, value, type, onChange, error, placeholder, leftIcon }: inputProps) {
