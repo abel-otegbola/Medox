@@ -1,7 +1,7 @@
 "use client"
 import CircleText from "@/assets/icons/circleText";
 import Button from "@/components/button/button";
-import { MagnifyingGlass, Play } from "@phosphor-icons/react";
+import { ArrowRight, Play } from "@phosphor-icons/react";
 import Image from "next/image";
 
 export default function Home() {
@@ -13,7 +13,7 @@ export default function Home() {
           <h1 className="sm:text-[40px] text-[28px] font-bold mx-auto">Access Quality Healthcare from Anywhere</h1>
           <p className="mb-2">Our platform connects you with experienced doctors for online consultations, making healthcare more accessible and convenient.</p>
           <div className="flex gap-6 items-center">
-            <Button href="/doctors" className="gap-3 pl-4 rounded-full"><MagnifyingGlass /> Search Doctors</Button>
+            <Button href="/login" className="gap-4 pr-6 rounded-full py-6">Get Started<ArrowRight size={16} /> </Button>
             <div className="flex relative h-[65px] w-[65px] items-center justify-center">
               <CircleText width={65} height={65} className="animate-spin-slow absolute top-0 left-0"/>
               <Play weight="fill" size={24} className="text-primary cursor-pointer z-[2]"/>

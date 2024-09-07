@@ -31,7 +31,10 @@ export default function Header() {
     return (
         <div className="flex items-center justify-between sticky md:top-2 top-0 left-0 z-[50] bg-white/[0.8] dark:bg-dark/[0.9] dark:text-gray md:p-3 p-4 md:m-2 md:mx-[10%] md:rounded-full backdrop-blur-sm border border-primary/[0.1] dark:border-primary/[0.09]">
             <Link href="/" className="md:ml-3">
-                <LogoIcon width={30} />
+                <div className="flex items-center">
+                    <LogoIcon width={30}/>
+                    <h2 className="font-bold text-xl">edo<span className="text-primary">x</span></h2>
+                </div>
             </Link>
 
             <nav className="md:flex items-center justify-between gap-4 hidden">
