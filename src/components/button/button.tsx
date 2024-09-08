@@ -17,7 +17,7 @@ export default function Button({ variant, className, href, size, disabled, onCli
     const variants = {
         primary: "bg-primary text-white focus:bg-primary/[0.8] hover:bg-primary/[0.8] dark:hover:",
         secondary: "bg-white dark:bg-dark text-primary focus:bg-tetiary dark:bg-gray/[0.08] hover:bg-tetiary  dark:focus:bg-gray/[0.2] dark:hover:bg-gray/[0.2] border border-primary",
-        tetiary: "bg-white dark:bg-dark text-dark dark:text-gray focus:bg-tetiary dark:bg-gray/[0.08] hover:bg-tetiary  dark:focus:bg-gray/[0.2] dark:hover:bg-gray/[0.2] border border-gray/[0.3]"
+        tetiary: "bg-white dark:bg-dark text-dark dark:text-gray focus:bg-tetiary dark:bg-gray/[0.08] hover:bg-tetiary dark:focus:bg-gray/[0.2] dark:hover:bg-gray/[0.2] border border-gray/[0.5] dark:border-gray/[0.04]"
     }
 
     return (

@@ -66,8 +66,8 @@ export default function Register() {
                                 <Dropdown name="accountType" className="rounded-full" placeholder="Select type of account" value={data?.role} onChange={(value) => setData({ ...data, role: value })} error="" 
                                     options={[
                                         { id: 0, title: "User", icon: <User /> },
-                                        { id: 0, title: "Doctor", icon: <Stethoscope /> },
-                                        { id: 0, title: "Health center", icon: <Hospital /> },
+                                        { id: 1, title: "Doctor", icon: <Stethoscope /> },
+                                        { id: 2, title: "Health center", icon: <Hospital /> },
                                     ]}
                                 />
                                 
