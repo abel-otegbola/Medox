@@ -5,7 +5,7 @@ import Link from "next/link";
 function Footer() {
     return (
         <footer className="bg-black dark:bg-[#000]/[0.6] text-[#D9D9F2] mt-12">
-            <div className="grid lg:grid-cols-4 grid-cols-2 text-[12px] gap-[30px] py-[30px] md:px-[10%] px-8 border border-transparent border-t-gray-700/[0.09] dark:border-t-gray-100/[0.09]">
+            <div className="grid lg:grid-cols-4 grid-cols-2 text-[12px] gap-[30px] py-[30px] md:px-[12%] px-4 border border-transparent border-t-gray-700/[0.09] dark:border-t-gray-100/[0.09]">
                 <ul className="w-full">
                     <h2 className="py-2 font-semibold uppercase">Pages</h2>
                     <li className="flex w-full"><Link href="/" className="py-[5px] w-full hover:text-primary">Homepage</Link></li>

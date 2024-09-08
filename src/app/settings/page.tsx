@@ -49,13 +49,13 @@ function Settings() {
 
     return (
         <>
-        <div className="md:flex items-start md:px-[12%] px-8">
+        <div className="md:flex items-start md:px-[12%] px-4">
             
             <div className="md:m-2 flex-1 py-6">
-                <h2 className="flex items-center gap-3 font-semibold md:text-[32px] text-[24px] p-4 border border-transparent border-b-gray/[0.1] dark:border-b-gray/[0.08]">Settings</h2>
+                <h2 className="flex items-center gap-3 font-semibold md:text-[32px] text-[24px] py-4 border border-transparent border-b-gray/[0.1] dark:border-b-gray/[0.08]">Settings</h2>
 
 
-                <div className="p-4 border border-transparent border-b-gray/[0.2] dark:border-b-gray/[0.08]">
+                <div className="py-4 border border-transparent border-b-gray/[0.2] dark:border-b-gray/[0.08]">
                     <h3 id="appearance" className="py-2 text-primary">Appearance</h3>
                     <p className="py-4">Select or customize your ui theme</p>
                     <div className="flex gap-4 py-2">
@@ -75,7 +75,7 @@ function Settings() {
                     
                 </div>
 
-                <div className="p-4 border border-transparent border-b-gray-200 dark:border-b-gray-100/[0.08]">
+                <div className="py-4 border border-transparent border-b-gray-200 dark:border-b-gray-100/[0.08]">
                     <h3 id="preferences" className="py-2 text-primary">Preferences</h3>
                     <p className="py-4">Font size</p>
                     <div className="">
