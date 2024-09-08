@@ -18,6 +18,7 @@ export default function Search({ className, disabled, placeholder }: dropdownPro
 
             <div className={`flex items-center relative rounded-[4px] bg-white dark:bg-dark dark:text-gray w-full h-[40px] p-1 px-4 border border-gray  dark:border-gray/[0.2] duration-500 z-[10] 
                 ${focus ? "border-primary shadow-input-active" : "border-gray "}
+                ${className}
             `}>
                 <span className="opacity-[0.5]"><MagnifyingGlass size={16} /></span>
                 <input 
