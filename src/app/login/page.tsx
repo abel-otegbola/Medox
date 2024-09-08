@@ -54,11 +54,11 @@ export default function Loginpage() {
                                     <p className="mt-2 mb-3">Add your details below to get back into the app</p>
                                 </div>
                                 
-                                <Input name="email" label="Email address" value={values.email} onChange={handleChange} type="email" error={touched.email ? errors.email : ""} placeholder="e.g alex@email.com" leftIcon={<Envelope size={16}/>}/>
+                                <Input name="email" className="rounded-full" label="" value={values.email} onChange={handleChange} type="email" error={touched.email ? errors.email : ""} placeholder="Email Address" leftIcon={<Envelope size={16}/>}/>
 
-                                <Input name="password" label="Password" value={values.password} onChange={handleChange} type={"password"} error={touched.password ? errors.password : ""} placeholder="At least 8 characters" leftIcon={<LockKey size={16}/>}/>
+                                <Input name="password" className="rounded-full" label="" value={values.password} onChange={handleChange} type={"password"} error={touched.password ? errors.password : ""} placeholder="Password" leftIcon={<LockKey size={16}/>}/>
 
-                                <Button size="full" className="rounded-full">{ isSubmitting || loading ? <Spinner size={16} className="animate-spin" /> : "Login"}</Button>
+                                <Button size="full" className="rounded-full py-5">{ isSubmitting || loading ? <Spinner size={16} className="animate-spin" /> : "Login"}</Button>
                                 
                                 <p className="text-center">Don&apos;t have an account? <Link href={"/register"} className="text-primary">Create account</Link></p>
                             </form>

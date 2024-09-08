@@ -27,6 +27,7 @@ export default function Input({ className, disabled, label, name, value, type, o
             <div className={`flex items-center gap-2 relative rounded-[4px] bg-white dark:bg-dark dark:text-gray w-full h-[40px] border p-1 px-3 duration-500 
                 ${error && !focus ? "border-red text-red " : "border-gray dark:border-gray/[0.2] "}
                 ${focus ? "border-primary shadow-input-active" : ""}
+                ${className}
             `}>
                 <span className={!focus ? "opacity-[0.4]": "text-primary"}>{ leftIcon }</span>
                 <input 
