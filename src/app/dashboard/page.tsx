@@ -16,14 +16,14 @@ export default function Dashboard() {
             </div>
             
             <div className="grid lg:grid-cols-2 md:m-4 flex-wrap gap-4">
-                <div className="flex flex-col gap-4 w-full min-h-[300px] px-4 pb-4 border border-gray/[0.6] dark:border-gray/[0.08] md:rounded-[8px] bg-white dark:bg-dark dark:text-gray">
+                <div className="flex flex-col gap-4 w-full min-h-[300px] md:my-0 my-8 px-4 pb-4 md:border border-gray/[0.6] dark:border-gray/[0.08] md:rounded-[8px] bg-white dark:bg-dark dark:text-gray">
                     <div className="flex justify-between items-center py-4 border border-transparent border-b-gray/[0.6] dark:border-b-gray/[0.08]">
                     
-                        <h2 className="flex gap-2 items-center capitalize text-[14px] font-semibold text-[16px]">
+                        <h2 className="flex gap-2 items-center capitalize text-[14px] font-semibold text-[14px]">
                             <ChartBar size={20} color="green" />
                             Overview
                         </h2>
-                        <div>
+                        <div className="px-2">
                             <p className="flex items-center gap-1 text-[8px] mb-1">
                                 <span className="h-2 w-2 bg-primary rounded-full"></span>
                                 <span>Schedules</span>
@@ -37,10 +37,10 @@ export default function Dashboard() {
                     <OverviewChart />
                 </div>
 
-                <div className="flex flex-col gap-4 w-full min-h-[300px] px-4 pb-4 border border-gray/[0.6] dark:border-gray/[0.08] md:rounded-[8px] bg-white dark:bg-dark dark:text-gray">
-                    <div className="flex justify-between items-center py-5 border border-transparent border-b-gray/[0.6] dark:border-b-gray/[0.08]">
+                <div className="flex flex-col gap-4 w-full min-h-[300px] md:my-0 my-8 px-4 pb-4 border border-gray/[0.6] dark:border-gray/[0.08] md:rounded-[8px] bg-white dark:bg-dark dark:text-gray">
+                    <div className="flex justify-between items-center py-5 md:border border-transparent border-b-gray/[0.6] dark:border-b-gray/[0.08]">
                     
-                        <h2 className="flex gap-2 items-center capitalize text-[14px] font-semibold text-[16px]">
+                        <h2 className="flex gap-2 items-center capitalize text-[14px] font-semibold text-[14px]">
                             <UserPlus size={20} color="orange" />
                             Patients
                         </h2>
@@ -86,10 +86,10 @@ export default function Dashboard() {
                 </div>
             </div>
 
-            <div className="flex flex-col gap-4 md:mx-4 mb-4 min-h-[300px] px-4 pb-4 border border-gray/[0.6] dark:border-gray/[0.08] md:rounded-[8px] bg-white dark:bg-dark dark:text-gray">
-                <div className="flex justify-between items-center py-5 border border-transparent border-b-gray/[0.6] dark:border-b-gray/[0.08]">
+            <div className="flex flex-col gap-4 md:mx-4 mb-4 min-h-[300px] md:my-0 my-8 px-4 pb-4 border border-gray/[0.6] dark:border-gray/[0.08] md:rounded-[8px] bg-white dark:bg-dark dark:text-gray">
+                <div className="flex justify-between items-center py-5 md:border border-transparent border-b-gray/[0.6] dark:border-b-gray/[0.08]">
                 
-                    <h2 className="flex gap-2 items-center capitalize text-[14px] font-semibold text-[16px]">
+                    <h2 className="flex gap-2 items-center capitalize text-[14px] font-semibold text-[14px]">
                         <Calendar size={20} color="purple" />
                         Schedules
                     </h2>
