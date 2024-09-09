@@ -1,5 +1,5 @@
 'use client'
-import { useRouter } from "next/navigation";
+import { useRouter } from "nextjs-toploader/app";
 import { ReactNode, ButtonHTMLAttributes } from "react";
 
 interface buttonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

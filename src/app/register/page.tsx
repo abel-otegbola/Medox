@@ -56,11 +56,11 @@ export default function Register() {
                             isSubmitting,
                             /* and other goodies */
                         }) => (
-                            <form className="flex flex-col gap-5 p-[10%] border md:border-transparent border-primary/[0.1]" onSubmit={handleSubmit}>
+                            <form className="flex flex-col items-center gap-5 p-[10%] border md:border-transparent border-primary/[0.1]" onSubmit={handleSubmit}>
                                 
                                 <div>
-                                    <h1 className="text-[32px] font-bold">Create Account</h1>     
-                                    <p className="mt-2 mb-3">All information provided are secured.</p> 
+                                    <h1 className="text-[32px] font-bold text-center">Create Account</h1>     
+                                    <p className="mt-2 mb-3 text-center">All of your supplied information provided is secured.</p> 
                                 </div>
 
                                 <Dropdown name="accountType" className="rounded-full" placeholder="Select type of account" value={data?.role} onChange={(value) => setData({ ...data, role: value })} error="" 

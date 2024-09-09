@@ -48,9 +48,9 @@ export default function Loginpage() {
                             isSubmitting,
                         }) => (
 
-                            <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-[10%] border md:border-transparent border-primary/[0.1]">
+                            <form onSubmit={handleSubmit} className="flex flex-col items-center gap-6 p-[10%] border md:border-transparent border-primary/[0.1]">
                                 <div>
-                                    <h1 className="font-bold text-[32px]">Welcome</h1>
+                                    <h1 className="font-bold text-[32px] text-center">Welcome</h1>
                                     <p className="mt-2 mb-3">Add your details below to get back into the app</p>
                                 </div>
                                 

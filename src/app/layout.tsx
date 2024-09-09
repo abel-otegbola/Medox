@@ -4,6 +4,7 @@ import "./globals.css";
 import AuthProvider from "@/context/useAuth";
 import Footer from "@/components/footer/footer";
 import CheckDashboard from "@/components/header/checkHeader";
+import NextTopLoader from "nextjs-toploader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
     <html lang="en">
         <body className={inter.className + " text-[12px] text-secondary dark:bg-dark dark:text-gray"}>
           <AuthProvider>
+            <NextTopLoader />
               <CheckDashboard />
               {children}
               <Footer />
