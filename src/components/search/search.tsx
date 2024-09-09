@@ -4,13 +4,15 @@ import { ReactNode, useState } from "react";
 
 interface dropdownProps {
     className?: string;
+    value?: string;
+    onChange?: (aug0: string) => void;
     disabled?: boolean;
     label?: string;
     placeholder?: string;
     leftIcon?: ReactNode;
 }
 
-export default function Search({ className, disabled, placeholder }: dropdownProps) {
+export default function Search({ value, onChange, className, disabled, placeholder }: dropdownProps) {
     const [focus, setFocus] = useState(false)
 
     return (
@@ -26,9 +28,11 @@ export default function Search({ className, disabled, placeholder }: dropdownPro
                         ${className} 
                         ${disabled ? "opacity-[0.25]" : ""}
                     `}
+                    value={value}
                     placeholder={placeholder}
                     onFocus={() => setFocus(true)}
                     onBlur={() => setFocus(false)}
+                    onChange={(e) => onChange ? onChange(e.target.value): ""}
                 />
             </div>
         </div>

@@ -19,8 +19,8 @@ export default function Register() {
     return (
         <div className="min-h-[500px] flex mt-[3%] gap-8 md:px-[12%] py-5 justify-between">
 
-            <div className="md:block hidden w-[400px] h-[550px] relative rounded-[20px]">
-                <Image src={"/images/doctor.jpg"} alt="guitarist" fill sizes={"100%"} className="rounded-[20px] object-cover" />
+            <div className="md:block hidden w-[400px] h-[500px] relative rounded-[20px]">
+                <Image src={"/images/doctor.png"} alt="guitarist" fill sizes={"100%"} className="rounded-[20px] bg-primary object-cover" />
                 <div className="flex justify-end flex-col p-8 h-full">
                     <div className="flex flex-col gap-4 p-4 rounded-lg bg-[#101012]/[0.9] z-[2] text-white text-xs">
                         <h4 className="text-[12px]">I got access to the patients in minutes</h4>
@@ -33,9 +33,9 @@ export default function Register() {
                 </div>
             </div>
 
-            <div className="flex-1 flex justify-center">
+            <div className="flex-1 flex justify-center items-center">
                 
-                <div className="sm:w-[476px] px-12">   
+                <div className="sm:w-[476px] w-full px-12">   
 
                     <div className="flex flex-col justify-center">
                         <Formik
@@ -59,8 +59,8 @@ export default function Register() {
                             <form className="flex flex-col gap-5 p-[10%] border md:border-transparent border-primary/[0.1]" onSubmit={handleSubmit}>
                                 
                                 <div>
-                                    <h1 className="text-[40px] font-bold">Create Account</h1>     
-                                    <p className="mt-2 mb-3">Provide every credential appropriately. We ensure your data is secured.</p> 
+                                    <h1 className="text-[32px] font-bold">Create Account</h1>     
+                                    <p className="mt-2 mb-3">All information provided are secured.</p> 
                                 </div>
 
                                 <Dropdown name="accountType" className="rounded-full" placeholder="Select type of account" value={data?.role} onChange={(value) => setData({ ...data, role: value })} error="" 

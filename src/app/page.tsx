@@ -27,7 +27,7 @@ export default function Home() {
           <p className="font-medium"><b className="font-bold">5.0</b> from 120+ reviews</p>
         </div>
 
-        <div className="flex py-[2%] items-start lg:w-[44%] text-white dark:text-dark">
+        <div className="flex py-[2%] items-start lg:w-[44%] text-white dark:text-[#000]/[0.3]">
           <Hero className="md:h-[340px] h-auto w-full" />
         </div>
       </header>

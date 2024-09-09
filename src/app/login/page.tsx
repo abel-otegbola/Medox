@@ -16,7 +16,7 @@ export default function Loginpage() {
     return (
         <div className="min-h-[500px] flex mt-4 md:mx-[12%] sm:items-center justify-between">
             <div className="md:block hidden w-[400px] h-[450px] relative rounded-[20px]">
-              <Image src={"/images/doctor.jpg"} alt="guitarist" fill sizes={"100%"} className="rounded-[20px] object-cover" />
+              <Image src={"/images/doctor.png"} alt="guitarist" fill sizes={"100%"} className="rounded-[20px] bg-primary object-cover" />
               <div className="flex justify-end flex-col p-8 h-full">
                 <div className="flex flex-col gap-4 p-4 rounded-lg bg-[#101012]/[0.9] z-[2] text-white text-xs">
                     <h4 className="text-[12px]">I got access to the patients in minutes</h4>
@@ -50,7 +50,7 @@ export default function Loginpage() {
 
                             <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-[10%] border md:border-transparent border-primary/[0.1]">
                                 <div>
-                                    <h1 className="font-bold text-[40px]">Welcome</h1>
+                                    <h1 className="font-bold text-[32px]">Welcome</h1>
                                     <p className="mt-2 mb-3">Add your details below to get back into the app</p>
                                 </div>
                                 
