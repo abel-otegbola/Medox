@@ -26,6 +26,9 @@ const AuthProvider = ({ children }: { children: ReactNode}) => {
     const [loading, setLoading] = useState(false);
     const router = useRouter()
 
+    const formatError = (msg: string) => {
+        return msg.replace("Firebase: Error (auth/", "").replace("-", " ").replace(")", "")
+    }
 
     const signIn = (email: string, password: string) => {
         setLoading(true)
@@ -36,7 +39,7 @@ const AuthProvider = ({ children }: { children: ReactNode}) => {
             router.push("/dashboard")
         })
         .catch((error) => {
-            setPopup({ type: "error", msg: error.message.replace("Firebase: Error", "") })
+            setPopup({ type: "error", msg: formatError(error.message) })
             setLoading(false)
         });
     }
@@ -50,7 +53,7 @@ const AuthProvider = ({ children }: { children: ReactNode}) => {
             router.push("/dashboard")
         })
         .catch((error) => {
-            setPopup({ type: "error", msg:  error.message.replace("Firebase: Error", "") })
+            setPopup({ type: "error", msg: formatError(error.message) })
             setLoading(false)
         });
     }
@@ -60,7 +63,7 @@ const AuthProvider = ({ children }: { children: ReactNode}) => {
         .then(() => {
             setPopup({ type: "success", msg:  "Logout Successful" })
           }).catch((error) => {
-            setPopup({ type: "error", msg:  error.message.replace("Firebase: Error", "") })
+            setPopup({ type: "error", msg: formatError(error.message) })
           });
     }
 
