@@ -14,7 +14,7 @@ const config: Config = {
         "secondary": "#1D2128",
         "tetiary": "#FAFAFA",
         "black": "#333333",
-        "dark": "#1E1C21",
+        "dark": "#232227",
         "brown": "#737373",
         "gray": "#D9D9D9",
         "slate": "#FAFAFA",

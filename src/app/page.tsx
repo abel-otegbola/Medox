@@ -1,6 +1,6 @@
 "use client"
 import CircleText from "@/assets/icons/circleText";
-import Hero from "@/assets/icons/hero";
+// import Hero from "@/assets/icons/hero";
 import Button from "@/components/button/button";
 import { ArrowRight, Play } from "@phosphor-icons/react";
 import Image from "next/image";
@@ -14,7 +14,7 @@ export default function Home() {
           <h1 className="sm:text-[40px] text-[28px] font-bold mx-auto">Access Quality Healthcare from Anywhere</h1>
           <p className="mb-2">Our platform connects you with experienced doctors for online consultations, making healthcare more accessible and convenient.</p>
           <div className="flex gap-6 items-center">
-            <Button href="/login" className="gap-4 pr-6 rounded-full py-6">Get Started<ArrowRight size={16} /> </Button>
+            <Button href="/checkup" className="gap-4 pr-6 rounded-full py-6">Get Started<ArrowRight size={16} /> </Button>
             <div className="flex relative h-[65px] w-[65px] items-center justify-center">
               <CircleText width={65} height={65} className="animate-spin-slow absolute top-0 left-0"/>
               <Play weight="fill" size={24} className="text-primary cursor-pointer z-[2]"/>
@@ -28,7 +28,8 @@ export default function Home() {
         </div>
 
         <div className="flex py-[2%] items-start lg:w-[44%] text-white dark:text-[#000]/[0.3]">
-          <Hero className="md:h-[340px] h-auto w-full" />
+          {/* <Hero className="md:h-[340px] h-auto w-full" /> */}
+          <Image src="/images/hero-img.webp" alt="hero-img" width={500} height={340} />
         </div>
       </header>
 
