@@ -1,10 +1,12 @@
 'use client'
 import { useLocalStorage } from "@/customHooks/useLocaStorage";
-import { app } from "../firebase/firebase";
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, User } from "firebase/auth";
+import { app, db } from "../firebase/firebase";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, User } from "firebase/auth";
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import { Toaster, toast } from "react-hot-toast";
 import { useRouter } from "nextjs-toploader/app";
+import { addDoc, collection } from "firebase/firestore";
+import { signupData } from "@/app/register/page";
 
 type values = {
     user: User;
@@ -12,7 +14,9 @@ type values = {
     loading: boolean;
     setPopup: (aug0: values["popup"]) => void;
     signIn: (email: string, password: string) => void; 
-    signUp: (email: string, password: string) => void;
+    signUp: (data: signupData) => void;
+    socialSignIn: (type: string) => void;
+    addUser: (data: signupData) => void;
     logOut: () => void;
 }
 
@@ -44,11 +48,11 @@ const AuthProvider = ({ children }: { children: ReactNode}) => {
         });
     }
 
-    const signUp = (email: string, password: string) => {
+    const signUp = (data: signupData) => {
         setLoading(true)
-        createUserWithEmailAndPassword(auth, email, password)
+        createUserWithEmailAndPassword(auth, data.email, data.password)
         .then(() => {
-            setPopup({ type: "success", msg:  "Signup Successful" })
+            addUser(data)
             setLoading(false)
             router.push("/dashboard")
         })
@@ -58,6 +62,42 @@ const AuthProvider = ({ children }: { children: ReactNode}) => {
         });
     }
     
+    const socialSignIn = (type: string) => {
+        setLoading(true)
+        if(type === "Google") {
+            const provider = new GoogleAuthProvider()
+            signInWithPopup(auth, provider)
+            .then(() => {
+                // const credential = GoogleAuthProvider.credentialFromResult(result);
+                // const token = credential?.accessToken;
+                // const user = result.user
+                setPopup({ type: "success", msg:  "Login Successful" })
+                setLoading(false)
+
+            })
+            .catch(error => {
+                setPopup({ type: "error", msg: formatError(error.message) })
+                setLoading(false)
+            })
+        }
+    }
+
+    
+    const addUser = async (data: signupData) => {
+        setLoading(true)
+        try {
+            const docRef = await addDoc(collection(db, "users"), data);
+            console.log(docRef)
+            setPopup({ type: "success", msg: "User added successfully" })
+        }
+        catch(e) {
+            setPopup({ type: "error", msg: "Error signing up User" })
+            auth.currentUser?.delete()
+            setLoading(false)
+            return false
+        }
+    }
+
     const logOut = () => {
         signOut(auth)
         .then(() => {
@@ -83,7 +123,7 @@ const AuthProvider = ({ children }: { children: ReactNode}) => {
       }, [popup]);
 
     return (
-        <AuthContext.Provider value={{ user, popup, loading, setPopup, signIn, signUp, logOut }}>
+        <AuthContext.Provider value={{ user, popup, loading, setPopup, signIn, signUp, socialSignIn, addUser, logOut }}>
             <Toaster containerClassName="p-8" />
             {children}
         </AuthContext.Provider>

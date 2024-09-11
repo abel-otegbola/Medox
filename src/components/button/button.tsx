@@ -12,7 +12,7 @@ interface buttonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     children: ReactNode
 }
 
-export default function Button({ variant, className, href, size, disabled, onClick, children }: buttonProps) {
+export default function Button({ variant, className, href, size, disabled, onClick, children, ...props }: buttonProps) {
     const router = useRouter()
     const variants = {
         primary: "bg-primary text-white focus:bg-primary/[0.8] hover:bg-primary/[0.8] dark:hover:",
@@ -27,6 +27,7 @@ export default function Button({ variant, className, href, size, disabled, onCli
             ${disabled ? "opacity-[0.25]" : ""}
             ${size === "full" ? "w-full" : "w-fit"}
         `}
+        {...props}
         disabled={disabled}
         onClick={() => href ? router.push(href) : onClick? onClick() : ""}
         >

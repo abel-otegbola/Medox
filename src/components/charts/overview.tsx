@@ -16,19 +16,19 @@ export default function OverviewChart() {
         datasets: [
             {
                 data: scheduleData,
-                borderColor: "rgba(200, 53, 53, 0.6)",
+                borderColor: "rgba(255, 100, 100, 0.8)",
                 fill: {
                     target: 'origin',
-                    above: "rgba(200, 53, 53, 0.2)",
+                    above: "rgba(255, 100, 100, 0.2)",
                     below: "rgba(0, 0, 0, 0.1)",
                 }
             },
             {
                 data: patientsData,
-                borderColor: "rgba(40, 50, 200, 0.6)",
+                borderColor: "rgba(90, 100, 255, 0.8)",
                 fill: {
                     target: 'origin',
-                    above: "rgba(40, 50, 200, 0.2)",
+                    above: "rgba(90, 100, 255, 0.2)",
                     below: "rgba(0, 0, 0, 0.1)",
                 }
             }

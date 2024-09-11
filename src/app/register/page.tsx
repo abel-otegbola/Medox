@@ -8,13 +8,12 @@ import { Envelope, Hospital, LockKey, Spinner, Stethoscope, User } from "@phosph
 import { Formik } from "formik";
 import Image from "next/image";
 import Link from "next/link";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
-export interface data { role: string, email: string, fullname: string, password: string }
+export interface signupData { role: string, email: string, fullname: string, password: string }
 
 export default function Register() {
     const { signUp, loading } = useContext(AuthContext)
-    const [data, setData] = useState<data>({ role: "", email: "", fullname: "", password: "" })
 
     return (
         <div className="min-h-[500px] flex mt-[3%] gap-8 md:px-[12%] py-5 justify-between">
@@ -39,11 +38,10 @@ export default function Register() {
 
                     <div className="flex flex-col justify-center">
                         <Formik
-                        initialValues={{ email: '', password: '', fullname: "" }}
+                        initialValues={{ role: "", email: '', password: '', fullname: "" }}
                         validationSchema={registerSchema}
                         onSubmit={(values, { setSubmitting }) => {
-                            signUp(values.email, values.password )
-                            setData({...data, ...values});
+                            signUp(values)
                             setSubmitting(false);
                         }}
                         >
@@ -54,6 +52,7 @@ export default function Register() {
                             handleChange,
                             handleSubmit,
                             isSubmitting,
+                            setFieldValue,
                             /* and other goodies */
                         }) => (
                             <form className="flex flex-col items-center gap-5 p-[10%] border md:border-transparent border-primary/[0.1]" onSubmit={handleSubmit}>
@@ -63,7 +62,7 @@ export default function Register() {
                                     <p className="mt-2 mb-3 text-center">All of your supplied information provided is secured.</p> 
                                 </div>
 
-                                <Dropdown name="accountType" className="rounded-full" placeholder="Select type of account" value={data?.role} onChange={(value) => setData({ ...data, role: value })} error="" 
+                                <Dropdown name="role" className="rounded-full" placeholder="Select type of account" value={values.role} onChange={(value) => setFieldValue("role", value)} error={touched.role ? errors.role : ""} 
                                     options={[
                                         { id: 0, title: "User", icon: <User /> },
                                         { id: 1, title: "Doctor", icon: <Stethoscope /> },
@@ -71,13 +70,13 @@ export default function Register() {
                                     ]}
                                 />
                                 
-                                <Input name="fullname" className="rounded-full" value={values.email} onChange={handleChange} type="text" error={touched.fullname ? errors.fullname : ""} placeholder="Full name" leftIcon={<User size={16}/>}/>
+                                <Input name="fullname" className="rounded-full" value={values.fullname} onChange={handleChange} type="text" error={touched.fullname ? errors.fullname : ""} placeholder="Full name" leftIcon={<User size={16}/>}/>
 
                                 <Input name="email" className="rounded-full" value={values.email} onChange={handleChange} type="email" error={touched.email ? errors.email : ""} placeholder="Email address" leftIcon={<Envelope size={16}/>}/>
 
                                 <Input name="password" className="rounded-full" value={values.password} onChange={handleChange} type={"password"} error={touched.password ? errors.password : ""} placeholder="Password" leftIcon={<LockKey size={16}/>}/>
 
-                                <Button size="full" className="rounded-full py-5 mt-2">{ isSubmitting || loading ? <Spinner size={16} className="animate-spin" /> : "Create new account" }</Button>
+                                <Button size="full" type="submit" className="rounded-full py-5 mt-2">{ isSubmitting || loading ? <Spinner size={16} className="animate-spin" /> : "Create new account" }</Button>
 
                     
                                 <p className="text-center">Already have an account? <Link href={"/login"} className="text-primary">Login</Link></p>
