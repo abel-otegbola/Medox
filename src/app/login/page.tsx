@@ -1,9 +1,10 @@
 'use client'
+import GoogleIcon from "@/assets/icons/google";
 import Button from "@/components/button/button";
 import Input from "@/components/input/input";
 import { AuthContext } from "@/context/useAuth";
 import { loginSchema } from "@/schema/auth";
-import { Envelope, GoogleLogo, LockKey, Spinner } from "@phosphor-icons/react";
+import { Envelope, LockKey, Spinner } from "@phosphor-icons/react";
 import { Formik } from "formik";
 import Image from "next/image";
 import Link from "next/link";
@@ -38,7 +39,7 @@ export default function Loginpage() {
                             <p className="mt-2 mb-3">Add your details below to get back into the app</p>
                         </div>
 
-                        <Button size="full" variant="tetiary" onClick={() => socialSignIn("Google")} className="rounded-full py-5">{ loading ? <Spinner size={16} className="animate-spin" /> : <span className="flex gap-2 items-center"><GoogleLogo size={20} /> Google</span>}</Button>
+                        <Button size="full" variant="tetiary" onClick={() => socialSignIn("Google")} className="rounded-full py-5">{ loading ? <Spinner size={16} className="animate-spin" /> : <span className="flex gap-2 items-center"><GoogleIcon width={20} /></span>}</Button>
 
                         <p>OR</p>
 

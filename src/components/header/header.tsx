@@ -1,6 +1,6 @@
 'use client'
 import Tab from "../tab/tab";
-import { Headphones, House, Info, User } from "@phosphor-icons/react";
+import { Headphones, House, Info } from "@phosphor-icons/react";
 import { ReactNode, useContext, useState } from "react";
 import Menu from "../navMenu/navMenu";
 import Link from "next/link";
@@ -8,6 +8,7 @@ import LogoIcon from "@/assets/icons/logo";
 import { useOutsideClick } from "@/helpers/useClickOutside";
 import { AuthContext } from "@/context/useAuth";
 import Button from "../button/button";
+import Image from "next/image";
 
 type navTab =  {
     id: number | string,
@@ -50,7 +51,9 @@ export default function Header() {
                     !user ?
                     <Button href="/login" className="-my-2 rounded-full shadow">Login</Button>
                     :
-                    <button className="p-2 bg-gray/[0.3] dark:bg-gray/[0.08] rounded-full" onClick={() => setToggleMenu(!toggleMenu)}><User size={16}/></button>
+                    <button className="bg-gray/[0.3] dark:bg-gray/[0.08] rounded-full" onClick={() => setToggleMenu(!toggleMenu)}>
+                        <Image src="/images/profile-img.webp" alt="user" width={32} height={32} className="rounded-full" />
+                    </button>
                 }
                 {
                     toggleMenu && <Menu />
