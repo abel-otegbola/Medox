@@ -9,7 +9,7 @@ interface buttonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     size?: "full";
     disabled?: boolean,
     onClick?: () => void,
-    children: ReactNode
+    children?: ReactNode
 }
 
 export default function Button({ variant, className, href, size, disabled, onClick, children, ...props }: buttonProps) {

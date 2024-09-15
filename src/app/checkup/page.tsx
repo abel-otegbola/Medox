@@ -22,7 +22,7 @@ export default function Checkup() {
 
     const promptBot = () => {
         setLoading(true)
-        askGemini(`Hello! I have a health condition which is ${data.condition}, I currently live in ${data.location} region. List simple steps to follow in this condition.`)
+        askGemini(`Hello! I have a health condition which is ${data.condition}, I currently live in ${data.location} region. List healthcare centers around me that i can go in json format: [{name, address, phone}]`)
         .then(result => {
             setPrompts([ { type: "bot", id: nanoid(5), result } ])
             setLoading(false)
@@ -48,7 +48,7 @@ export default function Checkup() {
                 <div className="flex flex-col p-4">
                     <div className="flex-1 min-h-[300px]">
 
-                        <div className="flex item-start gap-2 md:w-[50%]">
+                        <div className="flex items-start gap-2 md:w-[50%]">
                             <LogoIcon width={30} className="p-1 rounded-full border border-primary/[0.09]" /> 
                             <div className="p-2 px-4 rounded bg-primary/[0.05] border border-gray/[0.4] dark:border-gray/[0.06]">
                                 <h2 className="flex items-center gap-3 font-semibold my-1">Condition and Location</h2>
@@ -87,9 +87,14 @@ export default function Checkup() {
                         <div className="flex flex-wrap gap-2 items-center py-4 max-h-[350px] overflow-y-auto">
                         {
                             prompts.map((item) => (
-                                <div key={item.id} className="p-4">
-                                    <div className={`markdown flex flex-col gap-2 p-2 mb-[2px] text-[12px] rounded-[8px] w-fit ${item.type === "bot" ? "" : "ml-auto"}`}><Markdown>{item.result}</Markdown></div>
-                                    <p className={`text-lg rounded-full p-2 border border-gray-500/[0.2] w-fit ${item.type === "bot" ? "" : "ml-auto"}`}>{item.type === "bot" ? <LogoIcon width={16} /> : <User/>}</p>
+                                <div key={item.id} className="flex items-start gap-2 md:w-[50%]">
+                                    <p className={`p-1 py-0 rounded-full border border-primary/[0.09]`}>{item.type === "bot" ? <LogoIcon width={16} /> : <User/>}</p>
+                                    
+                                    <div className="p-2 px-4 rounded bg-primary/[0.05] border border-gray/[0.4] dark:border-gray/[0.06]">
+                                        <div className={`markdown flex flex-col gap-2 p-2 mb-[2px] text-[12px] rounded-[8px] w-fit ${item.type === "bot" ? "" : "ml-auto"}`}>
+                                            <Markdown>{item.result}</Markdown>
+                                        </div>
+                                    </div>
                                 </div>
                             ))
                         }

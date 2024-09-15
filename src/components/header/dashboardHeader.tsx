@@ -1,11 +1,11 @@
 'use client'
-import { User } from "@phosphor-icons/react";
 import Menu from "../navMenu/navMenu";
 import Link from "next/link";
 import Search from "../search/search";
 import { useState } from "react";
 import { useOutsideClick } from "@/helpers/useClickOutside";
 import LogoIcon from "@/assets/icons/logo";
+import Avatar from "../avatar/avatar";
 
 
 export default function DashboardHeader() {
@@ -25,7 +25,9 @@ export default function DashboardHeader() {
                 <div className="flex-1">
                     <Search placeholder="Search Patients, Schedules" className="rounded-full" />
                 </div>
-                <button className="p-2 bg-gray/[0.3] dark:bg-gray/[0.08] rounded-full" onClick={() => setToggleMenu(!toggleMenu)}><User size={16}/></button>
+                <button className="p-2 bg-gray/[0.3] dark:bg-gray/[0.08] rounded-full" onClick={() => setToggleMenu(!toggleMenu)}>
+                    <Avatar />
+                </button>
                 {
                     toggleMenu && <Menu />
                 }

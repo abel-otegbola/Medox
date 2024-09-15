@@ -17,7 +17,7 @@ export default function Dashboard() {
     ]
 
     return (
-        <div className="md:bg-gray/[0.09] dark:md:bg-gray/[0.03] w-full h-full">
+        <div className="w-full h-full">
             <div className="flex flex-col gap-2 p-4 border border-transparent border-b-gray/[0.6] dark:border-b-gray/[0.08] bg-white dark:bg-dark dark:text-gray">
                 <h2 className="capitalize font-semibold text-[14px]"><span className="">Good Morning, Dr. </span>{user?.displayName || user?.email?.split("@")[0]}</h2>
                 <p className="opacity-[0.8]">Hope you&apos;re in a good mood. There are 56 patients waiting for you.</p>

@@ -27,7 +27,7 @@ export default function Menu () {
                         `}
                     >
                         <span className="md:text-lg text-2xl opacity-[0.6]">{item.icon}</span>
-                        <span className="md:inline opacity-[0.6]">{item.title}</span>
+                        <span className="md:inline">{item.title}</span>
                     </Link>
                 )) 
             }
@@ -38,7 +38,7 @@ export default function Menu () {
                 `}
             >
                 <span className="md:text-lg text-2xl opacity-[0.6]"><SignOut /></span>
-                <span className="md:inline opacity-[0.6]">Logout</span>
+                <span className="md:inline">Logout</span>
             </button>
         </div>       
     )

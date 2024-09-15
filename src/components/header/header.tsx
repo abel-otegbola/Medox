@@ -8,7 +8,7 @@ import LogoIcon from "@/assets/icons/logo";
 import { useOutsideClick } from "@/helpers/useClickOutside";
 import { AuthContext } from "@/context/useAuth";
 import Button from "../button/button";
-import Image from "next/image";
+import Avatar from "../avatar/avatar";
 
 type navTab =  {
     id: number | string,
@@ -52,7 +52,7 @@ export default function Header() {
                     <Button href="/login" className="-my-2 rounded-full shadow">Login</Button>
                     :
                     <button className="bg-gray/[0.3] dark:bg-gray/[0.08] rounded-full" onClick={() => setToggleMenu(!toggleMenu)}>
-                        <Image src="/images/profile-img.webp" alt="user" width={32} height={32} className="rounded-full" />
+                        <Avatar />
                     </button>
                 }
                 {
