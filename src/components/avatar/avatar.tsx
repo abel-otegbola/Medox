@@ -10,6 +10,6 @@ export default function Avatar() {
         <Image src={user?.photoURL} alt="user" width={32} height={32} className="rounded-full" />
     )
     else {
-        <p className="p-2 bg-primary/[0.09] rounded-full uppercase">{user?.displayName ? user?.displayName.charAt(0) + user?.displayName.charAt(1) : "ab"}</p>
+        <p className="p-2 bg-primary/[0.09] rounded-full uppercase">{user?.displayName ? user?.displayName.charAt(0) : "a"}</p>
     }
 }

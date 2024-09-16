@@ -25,7 +25,7 @@ export default function DashboardHeader() {
                 <div className="flex-1">
                     <Search placeholder="Search Patients, Schedules" className="rounded-full" />
                 </div>
-                <button className="p-2 bg-gray/[0.3] dark:bg-gray/[0.08] rounded-full" onClick={() => setToggleMenu(!toggleMenu)}>
+                <button className="rounded-full" onClick={() => setToggleMenu(!toggleMenu)}>
                     <Avatar />
                 </button>
                 {
