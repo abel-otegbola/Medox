@@ -1,5 +1,6 @@
 "use client"
 import OverviewChart from "@/components/charts/overview"
+import SchedulesLayout from "@/components/schedules/schedules"
 import { PatientsTable } from "@/components/tables/patientsTable"
 import { AuthContext } from "@/context/useAuth"
 import { Calendar, ChartBar, UserPlus } from "@phosphor-icons/react"
@@ -59,7 +60,7 @@ export default function Dashboard() {
                 </div>
             </div>
 
-            <div className="flex flex-col gap-4 md:mx-4 mb-4 min-h-[300px] md:my-0 my-8 px-4 pb-4 border border-gray/[0.6] dark:border-gray/[0.08] md:rounded-[8px] bg-white dark:bg-dark dark:text-gray">
+            <div className="flex flex-col gap-4 md:mx-4 mb-4 max-h-[300px] overflow-y-auto md:my-0 my-8 px-4 pb-4 border border-gray/[0.6] dark:border-gray/[0.08] md:rounded-[8px] bg-white dark:bg-dark dark:text-gray">
                 <div className="flex justify-between items-center py-5 md:border border-transparent border-b-gray/[0.6] dark:border-b-gray/[0.08]">
                 
                     <h2 className="flex gap-2 items-center capitalize text-[14px] font-semibold text-[14px]">
@@ -69,6 +70,8 @@ export default function Dashboard() {
 
                     <Link href="/dashboard/schedules" className="text-[10px] text-primary px-2 font-bold underline">See All</Link>
                 </div>
+                
+                <SchedulesLayout schedules={[]} value={new Date()} layout={"Calendar"} />
             </div>
         </div>
     )
