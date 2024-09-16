@@ -1,5 +1,6 @@
 "use client"
 import Sidebar from "@/components/sidebar/sidebar";
+import SchedulesProvider from "@/context/useSchedule";
 
 export default function DashboardLayout({
     children,
@@ -8,10 +9,12 @@ export default function DashboardLayout({
   }>) {
         return (
             <div className="flex min-h-[90vh]">
-                <Sidebar />
-                <div className="flex-1 md:bg-gray/[0.09] dark:md:bg-gray/[0.03] ">
-                    {children}
-                </div>
+                <SchedulesProvider>
+                    <Sidebar />
+                    <div className="w-full md:bg-gray/[0.09] dark:md:bg-gray/[0.03] ">
+                        {children}
+                    </div>
+                </SchedulesProvider>
             </div>
         )
 }
