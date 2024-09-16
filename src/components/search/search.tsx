@@ -18,8 +18,8 @@ export default function Search({ value, onChange, className, disabled, placehold
     return (
         <div className="relative flex flex-col w-full gap-1">
 
-            <div className={`flex items-center relative rounded-[4px] bg-white dark:bg-dark dark:text-gray w-full h-[40px] p-1 px-4 border border-gray  dark:border-gray/[0.2] duration-500 z-[10] 
-                ${focus ? "border-primary shadow-input-active" : "border-gray "}
+            <div className={`flex items-center relative rounded-[4px] bg-white dark:bg-primary/[0.04] dark:text-gray w-full h-[40px] p-1 px-4 border duration-500 z-[10] 
+                ${focus ? "border-primary shadow-input-active" : "border-primary/[0.1] "}
                 ${className}
             `}>
                 <span className="opacity-[0.5]"><MagnifyingGlass size={16} /></span>
