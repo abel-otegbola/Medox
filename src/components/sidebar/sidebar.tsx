@@ -68,7 +68,7 @@ export default function Sidebar() {
                 <div className="flex gap-4 items-center justify-between pr-6 text-[12px] font-semibold capitalize p-2 border border-gray/[0.6] dark:border-gray/[0.06] rounded-[10px]">
                     <div className="flex items-center gap-4">
                         <Avatar />
-                        <p>{user?.displayName || user?.email}</p>
+                        <p>{user?.displayName || user?.email?.split("@")[0]}</p>
                     </div>
                     <button onClick={() => logOut()} className="text-red">
                         <SignOut size={16} />

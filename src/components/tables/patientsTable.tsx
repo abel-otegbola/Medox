@@ -14,8 +14,8 @@ export function PatientsTable({ data, fields }: { data: dataProps[], fields: str
     }
 
     return (
-        <div className="w-full py-2 overflow-x-auto">
-            <table className="table-auto rounded-lg text-[10px] overflow-hidden text-left w-full min-w-[480px]">
+        <div className="w-[100%] py-2 overflow-x-auto">
+            <table className="table-auto rounded-lg sm:text-[10px] text-[8px] overflow-hidden text-left w-full min-w-[250px]">
                 <thead className="border border-gray/[0.6] dark:border-gray/[0.08] ">
                     <tr className="bg-primary/[0.08]">
                     {
@@ -34,7 +34,7 @@ export function PatientsTable({ data, fields }: { data: dataProps[], fields: str
                                     <td key={i} className="p-2 cursor-pointer">{
                                         header === "Name" ? 
                                         <div className="flex items-center gap-2 p-2">
-                                            <p className="p-2 bg-primary/[0.09] rounded-full uppercase">{item.name.charAt(0) + item.name.charAt(1)}</p>
+                                            <p className="p-2 bg-primary/[0.09] rounded-full uppercase sm:block hidden">{item.name.charAt(0) + item.name.charAt(1)}</p>
                                             <p className="flex flex-col gap-1">
                                                 <span className="font-semibold">{item.name}</span>
                                                 <span>{item.sex}, {item.age} Years</span>
@@ -42,7 +42,7 @@ export function PatientsTable({ data, fields }: { data: dataProps[], fields: str
                                         </div>
                                         :
                                         header === "Priority" ? <span  className={`${item.priority === "High" ? "bg-emerald-500/[0.3]" : item.priority === "Medium" ? "bg-fuchsia-500/[0.3]" : "bg-red/[0.3]"} py-1 px-2 rounded-lg text-[8px]`}>{item?.priority}</span>
-                                        : 
+                                        :
                                         (item)[header.toLowerCase()]
                                     }</td>
                                 ))

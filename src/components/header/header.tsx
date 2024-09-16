@@ -56,7 +56,7 @@ export default function Header() {
                     </button>
                 }
                 {
-                    toggleMenu && <Menu />
+                    toggleMenu && <Menu close={setToggleMenu} />
                 }
             </div>
         </div>

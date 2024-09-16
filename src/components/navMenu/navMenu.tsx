@@ -6,7 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useContext } from "react";
 
-export default function Menu () {
+export default function Menu ({ close }: { close: (aug0: boolean) => void; }) {
     const pathname = usePathname()
     const { logOut } = useContext(AuthContext)
 
@@ -16,12 +16,13 @@ export default function Menu () {
     ]
 
     return (
-        <div className="flex flex-col gap-2 p-2 w-[150px] rounded shadow-md border border-gray/[0.3] dark:border-gray/[0.1] absolute top-12 right-0 bg-white dark:bg-dark dark:text-gray">
+        <div className="flex flex-col gap-2 p-2 w-[150px] rounded shadow-md border border-gray/[0.3] dark:border-gray/[0.06] absolute top-12 right-0 bg-white dark:bg-dark dark:text-gray">
             { 
                 menu.map(item => (
                     <Link
                         key={item.id}
                         href={item.to}
+                        onClick={() => close(false)}
                         className={`flex items-center gap-2 h-[32px] p-[8px] hover:text-primary font-semibold rounded-[4px]
                             ${pathname === item.to ? "bg-tetiary dark:bg-gray/[0.08] text-primary" : ""}
                         `}
@@ -33,7 +34,7 @@ export default function Menu () {
             }
 
             <button 
-                onClick={() => logOut()}
+                onClick={() => {logOut(); close(false)}}
                 className={`flex items-center gap-2 h-[32px] p-[8px] hover:text-primary font-semibold rounded-[4px]
                 `}
             >

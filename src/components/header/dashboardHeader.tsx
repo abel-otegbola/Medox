@@ -29,7 +29,7 @@ export default function DashboardHeader() {
                     <Avatar />
                 </button>
                 {
-                    toggleMenu && <Menu />
+                    toggleMenu && <Menu close={setToggleMenu}/>
                 }
             </div>
         </div>
