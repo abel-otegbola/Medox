@@ -2,21 +2,25 @@
 import Button from "@/components/button/button";
 import Input from "@/components/input/input";
 import { AuthContext } from "@/context/useAuth";
+import { User } from "@phosphor-icons/react";
 import { useContext } from "react";
 
 export default function ProfilePage() {
     const { user } = useContext(AuthContext)
 
     return (
-        <div className="p-4 md:bg-gray/[0.2] dark:bg-gray/[0.05]">
-            <div className="border border-gray/[0.8] bg-white dark:bg-dark p-8 rounded-[8px] dark:border-gray/[0.08]">
-                <h3 id="account" className="py-2 text-lg">Account</h3>
-                <h3 className="pb-2 pt-4 text-sm">Profile</h3>
-                <p className="opacity-[0.6]">Update your photo and personal details</p>
+        <div className="bg-white dark:bg-dark h-full">
+            <div className="p-8 rounded-[8px]">
+                <h2 className="flex items-center gap-3 font-semibold md:text-[28px] bg-white dark:bg-dark text-[20px] p-4 border border-transparent border-b-gray/[0.1] dark:border-b-gray/[0.08]">
+                    <p className={``}><User width={24} /> </p>
+                    Profile
+                </h2>
+
+                <p className="opacity-[0.6] mt-6">Update your photo and personal details</p>
                 <div className="py-2">
                     <div className="">
-                        <p className="md:w-[23%] md:mb-0 mb-2">Profile Image: </p>
-                        <div className="h-[60px] w-[60px] rounded-full bg-slate-200 dark:bg-slate-200/[0.04]"></div>
+                        <p className="md:w-[23%] mb-4">Profile Image: </p>
+                        <div className="h-[60px] w-[60px] rounded bg-slate dark:bg-slate/[0.04]"></div>
                     </div>
                 </div>
                 <div className="py-2">
@@ -29,7 +33,7 @@ export default function ProfilePage() {
                         <Input name="Email" type="email" title="Email" label="Email" error="" value={user?.email || ""} />
                     </div>
                 </div>
-                <Button>Save changes</Button>
+                <Button className="bg-green-500 hover:bg-green-600">Save changes</Button>
             </div>
         </div>
     )
