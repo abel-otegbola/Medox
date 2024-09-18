@@ -9,9 +9,9 @@ export default function Home() {
   return (
     <main className="">
 
-      <header className="min-h-screen flex flex-wrap justify-between gap-8 md:px-[10%] px-4 md:py-[5%] py-12">
+      <header className="min-h-screen flex flex-wrap justify-between gap-8 md:px-[5%] px-4 md:py-[5%] py-12">
         <div className="flex flex-col gap-6 lg:w-[52%] md:pl-6">
-          <h1 className="sm:text-[40px] text-[28px] font-bold mx-auto">Access Quality Healthcare from Anywhere</h1>
+          <h1 className="sm:text-[48px] leading-[130%] text-[28px] font-bold mx-auto">Access Quality Healthcare from Anywhere</h1>
           <p className="mb-2">Our platform connects you with experienced doctors for online consultations, making healthcare more accessible and convenient.</p>
           <div className="flex gap-6 items-center">
             <Button href="/checkup" className="gap-4 pr-6 rounded-full py-6">Get Started<ArrowRight size={16} /> </Button>
@@ -27,7 +27,7 @@ export default function Home() {
           <p className="font-medium"><b className="font-bold">5.0</b> from 120+ reviews</p>
         </div>
 
-        <div className="flex py-[2%] items-start lg:w-[44%] text-white dark:text-[#000]/[0.3]">
+        <div className="flex py-[2%] items-start lg:w-[44%] text-white dark:text-[#181819]/[0.3]">
           <Hero className="md:h-[340px] h-auto w-full" />
           {/* <Image src="/images/hero-img.webp" alt="hero-img" width={500} height={340} /> */}
         </div>

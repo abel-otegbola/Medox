@@ -11,6 +11,6 @@ export default function Avatar() {
         )
     }
     else {
-       return <p className="h-[36px] w-[36px] flex items-center justify-center bg-primary/[0.09] rounded-full uppercase">{user?.displayName ? user?.displayName.charAt(0) : user?.email?.charAt(0)}</p>
+       return <p className="h-[36px] w-[36px] flex items-center justify-center bg-primary/[0.4] text-white font-bold rounded-full uppercase">{user?.displayName ? user?.displayName.charAt(0) : user?.email?.charAt(0)}</p>
     }
 }

@@ -1,6 +1,6 @@
 'use client'
 import Tab from "../tab/tab";
-import { Headphones, House, Info } from "@phosphor-icons/react";
+import { House, Stethoscope, UserPlus } from "@phosphor-icons/react";
 import { ReactNode, useContext, useState } from "react";
 import Menu from "../navMenu/navMenu";
 import Link from "next/link";
@@ -23,14 +23,14 @@ export default function Header() {
 
     const navTabs: navTab[] = [
         { id: 0, label: "Home", to: "/", icon: <House /> },
-        { id: 1, label: "About", to: "/shop", icon: <Info /> },
-        { id: 2, label: "Contact Us", to: "/talents", icon: <Headphones /> },
+        { id: 1, label: "Doctors", to: "/doctors", icon: <UserPlus /> },
+        { id: 2, label: "Checkup", to: "/checkup", icon: <Stethoscope /> },
     ]
     
     const menuRef = useOutsideClick(setToggleMenu, false)
 
     return (
-        <div className="flex items-center justify-between sticky md:top-2 top-0 left-0 z-[50] bg-white/[0.8] dark:bg-dark/[0.9] dark:text-gray md:p-3 p-4 md:m-2 md:mx-[10%] md:rounded-full backdrop-blur-sm border border-primary/[0.1] dark:border-primary/[0.09]">
+        <div className="flex items-center justify-between sticky md:top-2 top-0 left-0 z-[50] bg-white/[0.8] dark:bg-dark/[0.9] dark:text-gray md:p-3 p-4 md:m-2 md:mx-[5%] md:rounded-full backdrop-blur-sm border border-gray/[0.09] dark:border-gray/[0.03]">
             <Link href="/" className="md:ml-3">
                 <div className="flex items-center">
                     <LogoIcon width={30}/>

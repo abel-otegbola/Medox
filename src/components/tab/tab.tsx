@@ -21,7 +21,7 @@ export default function Tab ({ to, label, icon }: tabProps) {
             `}
         >
             <span className="md:text-lg text-2xl opacity-[0.6]">{icon}</span>
-            <span className="md:inline md:text-[12px] text-[8px]">{label}</span>
+            <span className="md:inline md:text-[14px] text-[10px]">{label}</span>
         </Link>
     )
 }

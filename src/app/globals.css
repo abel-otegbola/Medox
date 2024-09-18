@@ -3,6 +3,25 @@
 @tailwind utilities;
 
 
+::-webkit-scrollbar {
+	width: 4px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+	background: #f1f1f105;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+	background: #5858ed0e;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+	background: #3c5ff9;
+  }
+  
 
 /* React calendar styles */
 

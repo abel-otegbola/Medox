@@ -1,110 +1,118 @@
 'use client'
 import LogoIcon from "@/assets/icons/logo";
 import Button from "@/components/button/button";
-import Dropdown from "@/components/dropdown/dropdown";
 import Input from "@/components/input/input";
-import { askGemini } from "@/utils/geminiApi";
-import { PaperPlaneTilt, User } from "@phosphor-icons/react";
-import { nanoid } from "nanoid";
-import Markdown from "markdown-to-jsx"
+import { FilePlus, Stethoscope, User, UserCheck } from "@phosphor-icons/react";
 import { useState } from "react";
-import { LoaderIcon } from "react-hot-toast";
-import Image from "next/image";
 
 export default function Checkup() {
     const [data, setData] = useState({ condition: "", location: "",  msg: "" })
-    const [prompts, setPrompts] = useState<{ type: "bot" | "user", id: string, result: string }[]>([])
-    const [loading, setLoading] = useState(false)
+    const [active, setActive] = useState(0)
 
     const handleChange = (index: string, value: string) => {
         setData({ ...data, [index]: value })
     }
 
-    const promptBot = () => {
-        setLoading(true)
-        askGemini(`Hello! I have a health condition which is ${data.condition}, I currently live in ${data.location} region. List healthcare centers around me that i can go in json format: [{name, address, phone}]`)
-        .then(result => {
-            setPrompts([ { type: "bot", id: nanoid(5), result } ])
-            setLoading(false)
-        })
-        .catch(error => {
-            console.log(error)
-            setLoading(false)
-        })
-    }
+    const flow = [
+        { id: 0, icon: <User />, title: "Describe your condition", text: "Provide information on the medical condition" },
+        { id: 1, icon: <Stethoscope />, title: "Quick Assessments", text: "Answer few important questions." },
+        { id: 2, icon: <UserCheck />, title: "Symptoms", text: "State the symptoms you're currently experiencing." },
+        { id: 3, icon: <FilePlus />, title: "Finish", text: "Get your report and connect with our doctor." },
+    ]
 
     return (
-        <div className="flex flex-col gap-6 items-start md:px-[12%] py-6 px-4">
-            
-            <div className="rounded-t-[8px]">
-                <h2 className="flex items-center gap-2 text-[20px] font-bold">
-                    <Image src="/images/doctor.svg" alt="doctor" width={40} height={40} className="rounded-full p-1" />
-                    Checkup with Medox
-                </h2>
-            </div>
+        <div className="flex flex-col gap-6 items-start md:px-[6%] py-6 px-4">
 
-            <div className="rounded-[24px] w-full border border-primary/[0.09]">
+            <div className="flex w-full border border-gray/[0.09] dark:border-gray/[0.05] bg-tetiary dark:bg-[#000]/[0.2]">
 
-                <div className="flex flex-col p-4">
-                    <div className="flex-1 min-h-[300px]">
+                <div className="md:block hidden md:w-[35%] text-md text-[12px] leading-[120%] p-10 py-[10%] bg-dark/[0.06] dark:bg-[#000]/[0.2]">
 
-                        <div className="flex items-start gap-2 md:w-[50%]">
-                            <LogoIcon width={30} className="p-1 rounded-full border border-primary/[0.09]" /> 
-                            <div className="p-2 px-4 rounded bg-primary/[0.05] border border-gray/[0.4] dark:border-gray/[0.06]">
-                                <h2 className="flex items-center gap-3 font-semibold my-1">Condition and Location</h2>
-                                <p className="mb-4">Select the health condition and your location so we can connect you with the right healthcare.</p>
-                                            
-                                <div className="flex flex-col gap-4 w-full pb-5">
-                                    <Dropdown name="" value={data.condition} onChange={(value) => handleChange("condition", value)} error="" className="rounded-full" placeholder="What type of condition do you need checkup on."
-                                        options={[
-                                            {id: 0, title: "Emergency condition", icon: ""},
-                                            {id: 1, title: "An accident", icon: ""},
-                                            {id: 2, title: "Chronic condition", icon: ""},
-                                            {id: 3, title: "Symptoms check", icon: ""},
-                                            {id: 4, title: "General Health checkups", icon: ""},
-                                        ]}
-                                    />          
-                                    <Dropdown name="" value={data.condition} onChange={(value) => handleChange("location", value)} error="" className="rounded-full" placeholder="Select your location"
-                                        options={[
-                                            {id: 0, title: "Lagos", icon: ""},
-                                            {id: 1, title: "Abia", icon: ""},
-                                            {id: 2, title: "Nassarawa", icon: ""},
-                                            {id: 3, title: "Yobe", icon: ""},
-                                            {id: 4, title: "Ogun", icon: ""},
-                                        ]}
-                                    />
-                                    <Button variant="tetiary" className="rounded-full" disabled={data.condition === "" || data.location === ""} onClick={() => promptBot()}>Continue</Button>
+                
+                <LogoIcon width={40} height={40} className="p-2 rounded border border-primary/[0.2]" /> 
 
-                                </div>
+                {
+                    flow.map((status) => (
+                        <div key={status.id} className={`relative flex my-7 gap-4 items-center ${status.id < active+1 ? "text-green-600" : ""}`}>
+                            <span className={`relative text-[20px] p-2 rounded-full border border-dark/[0.2] z-[2] ${status.id < active+1 ? "bg-green-600 text-white" : ""}`}>{status.icon}</span>
+                            <div>
+                                <h2 className="sm:text-[12px] text-[14px] font-semibold">{status.title}</h2>
+                                <p className="opacity-[0.7] text-[12px] mt-1">{status.text}</p>
                             </div>
                         </div>
+                    ))
+                }
 
-                        {
-                            loading ? <LoaderIcon /> : ""
-                        }
+                </div>
 
+                <div className="flex flex-col  p-[10%] flex-1">
+                    <div className="flex-1 min-h-[400px]">
 
-                        <div className="flex flex-wrap gap-2 items-center py-4 max-h-[350px] overflow-y-auto">
-                        {
-                            prompts.map((item) => (
-                                <div key={item.id} className="flex items-start gap-2 md:w-[50%]">
-                                    <p className={`p-1 py-0 rounded-full border border-primary/[0.09]`}>{item.type === "bot" ? <LogoIcon width={16} /> : <User/>}</p>
-                                    
-                                    <div className="p-2 px-4 rounded bg-primary/[0.05] border border-gray/[0.4] dark:border-gray/[0.06]">
-                                        <div className={`markdown flex flex-col gap-2 p-2 mb-[2px] text-[12px] rounded-[8px] w-fit ${item.type === "bot" ? "" : "ml-auto"}`}>
-                                            <Markdown>{item.result}</Markdown>
-                                        </div>
-                                    </div>
+                        <div className="flex flex-col gap-1 items-center justify-center">
+                            <div className="flex p-8 py-6 mb-4 rounded bg-tetiary/[0.5] dark:bg-black/[0.1] text-gray">
+                                <LogoIcon width={50} height={50} className="p-3 rounded border border-primary/[0.09] bg-dark" /> 
+                            </div>
+                            <h2 className="font-bold text-[16px]">Checkup with Medox</h2>
+
+                            <div className="relative min-h-[250px] w-full overflow-x-hidden overflow-y-auto p-2 my-6">
+
+                                <div className={`w-full absolute top-0 left-0 duration-500 ${active === 0 ? "translate-x-0": "translate-x-[-120%]"}`}>
+                                    <p className="text-center">Describe your medical condition so we can connect you with the best healthcare</p>
+
+                                    <div className="grid sm:grid-cols-3 grid-cols-2 gap-4 mt-4 mb-5">
+                                        {
+                                            [
+                                                { id: 0, title: "Emergency Care", example: "Accident, stroke, heart attack", color: "bg-red/[0.09]" },
+                                                { id: 1, title: "Chronic Conditions", example: "Diabetes, arthritis, asthma", color: "bg-orange-600/[0.09]" },
+                                                { id: 2, title: "Preventive Care", example: "Annual physicals, vaccinations, screenings", color: "bg-green-600/[0.09]" },
+                                                { id: 3, title: "Symptom Management", example: "Pain, fatigue, fever", color: "bg-blue-600/[0.09]" },
+                                                { id: 4, title: "Mental Health", example: "Anxiety, depression, stress", color: "bg-purple-600/[0.09]" },
+                                                { id: 5, title: "Women's Health", example: "Gynecology, obstetrics, menopause", color: "bg-pink-600/[0.09]" },
+                                                { id: 6, title: "Men's Health", example: "Prostate health, testosterone, erectile dysfunction", color: "bg-slate/[0.09]" },
+                                                { id: 7, title: "Pediatrics", example: "Child development, vaccinations, common childhood illnesses", color: "bg-yellow-600/[0.09]" },
+                                                { id: 8, title: "Geriatrics", example: "Age-related conditions, memory loss, mobility issues", color: "bg-gray/[0.09]" },
+                                                { id: 9, title: "Specialized Care", example: "Oncology, cardiology, neurology", color: "bg-indigo-600/[0.09]" }
+                                            ].map(item => (
+                                                <button key={item.id} onClick={() => handleChange("condition", item.title)} className={`text-start p-3 px-4 border ${item.color} ${data.condition === item.title ? "border-2 border-primary text-primary" : "dark:border-gray/[0.04] border-gray/[0.7" } rounded-[10px] text-[12px]`}>
+                                                    <h2 className="font-semibold">{item.title}</h2>
+                                                    <p>e.g {item.example}</p>
+                                                </button>
+                                            ))
+                                        }
+                                    </div>  
                                 </div>
-                            ))
-                        }
+                                
+                                <div className={`w-full absolute top-0 left-0 duration-500 ${active === 0 ? "translate-x-[120%]": active === 1 ? "translate-x-0" : "translate-x-[-120%]"}`}>
+                                    <div className="flex flex-col gap-6 w-full">
+                                        <p className="text-center">Provide these information for our records</p>
+                                        <Input className="rounded-full" placeholder="Describe the symptoms you are experiencing" />
+                                        <Input className="rounded-full" placeholder="How long have you been experiencing this symptoms" />
+                                        <Input className="rounded-full" placeholder="Any known triggers or causes" />
+                                    </div>                    
+                                </div>
+                                
+                                <div className={`w-full absolute top-0 left-0 duration-500 ${active < 2 ? "translate-x-[120%]": active === 2 ? "translate-x-0" : "translate-x-[-120%]"}`}>
+                                    <div className="flex flex-col gap-6 w-full">
+                                        <p className="text-center">Symptoms</p>
+                                        <Input className="rounded-full" placeholder="Describe the symptoms you are experiencing" />
+                                    </div>                    
+                                </div>
+                            </div>
+
+                            <div className="flex justify-between w-full">
+                                {
+                                    active > 0 ?
+                                    <Button variant="secondary" onClick={() => setActive(active - 1)} className="rounded-full">Back</Button>
+                                    :
+                                    <span></span>
+                                }
+                                <Button onClick={() => setActive(active + 1)} className="rounded-full">Continue</Button>
+                            </div>
+
                         </div>
+
                     </div>
                 
-                    <div className="flex flex-col items-end gap-2 p-4 border border-primary/[0.09] rounded-[16px]">
-                        <Input name="message" className="border-none shadow-none" placeholder="Send message" type="text" value={data.msg} onChange={(e) => handleChange("msg", e.target.value)} error=""/>
-                        <Button className="rounded-full gap-2 pl-6" onClick={() => promptBot()}><PaperPlaneTilt size={16} /> Send</Button>
-                    </div>
+                    
                 </div>
 
             </div>
