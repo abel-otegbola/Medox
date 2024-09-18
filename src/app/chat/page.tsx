@@ -1,3 +1,4 @@
+"use client"
 import LogoIcon from "@/assets/icons/logo"
 import Button from "@/components/button/button"
 import Input from "@/components/input/input"
@@ -15,7 +16,7 @@ export default function Chat() {
     
     const promptBot = () => {
         setLoading(true)
-        askGemini(`Hello! As an Ai support, I want to diagnose a patient after which i will connect the patient to a doctor. the patient health condition which is, and currently reside in region. Generate an interview with the patient to get all necessary information before connecting with the doctor.`)
+        askGemini(`Hello! As an Ai support, I want to diagnose a patient after which i will connect the patient to a doctor. the patient health condition which is, and currently reside in region. Inform of an interview with the patient to get all necessary information before connecting with the doctor.`)
         .then(result => {
             setPrompts([ { type: "bot", id: nanoid(5), result } ])
             setLoading(false)
