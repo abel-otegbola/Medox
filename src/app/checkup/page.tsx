@@ -72,7 +72,7 @@ export default function Checkup() {
                                                 { id: 8, title: "Geriatrics", example: "Age-related conditions, memory loss, mobility issues", color: "bg-gray/[0.09]" },
                                                 { id: 9, title: "Specialized Care", example: "Oncology, cardiology, neurology", color: "bg-indigo-600/[0.09]" }
                                             ].map(item => (
-                                                <button key={item.id} onClick={() => handleChange("condition", item.title)} className={`text-start p-3 px-4 border ${item.color} ${data.condition === item.title ? "border-2 border-primary text-primary" : "dark:border-gray/[0.04] border-gray/[0.7" } rounded-[10px] text-[12px]`}>
+                                                <button key={item.id} onClick={() => handleChange("condition", item.title)} className={`text-start p-3 px-4 border ${item.color} ${data.condition === item.title ? "border-2 border-primary text-primary" : "dark:border-gray/[0.04] border-gray/[0.7]" } rounded-[10px] text-[12px]`}>
                                                     <h2 className="font-semibold">{item.title}</h2>
                                                     <p>e.g {item.example}</p>
                                                 </button>
