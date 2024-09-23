@@ -25,7 +25,7 @@ export default function Checkup() {
 
             <div className="flex w-full border border-gray/[0.09] dark:border-gray/[0.05] bg-tetiary dark:bg-[#000]/[0.2]">
 
-                <div className="md:block hidden md:w-[35%] text-md text-[12px] leading-[120%] p-10 py-[10%] bg-dark/[0.06] dark:bg-[#000]/[0.2]">
+                <div className="md:block hidden md:w-[35%] text-md text-[12px] leading-[120%] p-10 py-[10%] bg-dark text-gray dark:bg-[#000]/[0.2]">
 
                 
                 <LogoIcon width={40} height={40} className="p-2 rounded border border-primary/[0.2]" /> 
@@ -44,16 +44,16 @@ export default function Checkup() {
 
                 </div>
 
-                <div className="flex flex-col  p-[10%] flex-1">
+                <div className="flex flex-col p-[10%] flex-1">
                     <div className="flex-1 min-h-[400px]">
 
-                        <div className="flex flex-col gap-1 items-center justify-center">
+                        <div className="flex flex-col gap-1 items-center">
                             <div className="flex p-8 py-6 mb-4 rounded bg-tetiary/[0.5] dark:bg-black/[0.1] text-gray">
                                 <LogoIcon width={50} height={50} className="p-3 rounded border border-primary/[0.09] bg-dark" /> 
                             </div>
                             <h2 className="font-bold text-[16px]">Checkup with Medox</h2>
 
-                            <div className="relative min-h-[250px] w-full overflow-x-hidden overflow-y-auto p-2 my-6">
+                            <div className="relative min-h-[330px] w-full overflow-x-hidden overflow-y-auto p-2 my-6">
 
                                 <div className={`w-full absolute top-0 left-0 duration-500 ${active === 0 ? "translate-x-0": "translate-x-[-120%]"}`}>
                                     <p className="text-center">Describe your medical condition so we can connect you with the best healthcare</p>
@@ -69,12 +69,10 @@ export default function Checkup() {
                                                 { id: 5, title: "Women's Health", example: "Gynecology, obstetrics, menopause", color: "bg-pink-600/[0.09]" },
                                                 { id: 6, title: "Men's Health", example: "Prostate health, testosterone, erectile dysfunction", color: "bg-slate/[0.09]" },
                                                 { id: 7, title: "Pediatrics", example: "Child development, vaccinations, common childhood illnesses", color: "bg-yellow-600/[0.09]" },
-                                                { id: 8, title: "Geriatrics", example: "Age-related conditions, memory loss, mobility issues", color: "bg-gray/[0.09]" },
-                                                { id: 9, title: "Specialized Care", example: "Oncology, cardiology, neurology", color: "bg-indigo-600/[0.09]" }
                                             ].map(item => (
                                                 <button key={item.id} onClick={() => handleChange("condition", item.title)} className={`text-start p-3 px-4 border ${item.color} ${data.condition === item.title ? "border-2 border-primary text-primary" : "dark:border-gray/[0.04] border-gray/[0.7]" } rounded-[10px] text-[12px]`}>
                                                     <h2 className="font-semibold">{item.title}</h2>
-                                                    <p>e.g {item.example}</p>
+                                                    <p className="text-[10px]">e.g {item.example}</p>
                                                 </button>
                                             ))
                                         }

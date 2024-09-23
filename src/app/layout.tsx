@@ -26,7 +26,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-        <body className={roboto.className + " text-[14px] text-secondary dark:bg-dark dark:text-gray"}>
+        <body className={`${roboto.className} text-[14px] text-secondary dark:bg-dark dark:text-gray`}>
           <AuthProvider>
             <NextTopLoader />
               <CheckDashboard />

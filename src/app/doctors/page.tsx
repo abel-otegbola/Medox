@@ -14,7 +14,7 @@ export default function Doctors() {
     useEffect(() => {
         setLoading(true)
         // npiregistry.cms.hhs.gov/api/?version=2.1
-        axios.get(`https://clinicaltables.nlm.nih.gov/api/npi_org/v3/search?terms=${search}&count=24`)
+        axios.get(`https://clinicaltables.nlm.nih.gov/api/npi_org/v3/search?terms=${search}&count=20`)
         .then(res => {
             const data = res.data[3]
             const doctors = data.map((item: string[]) => {
@@ -37,7 +37,7 @@ export default function Doctors() {
     }, [search])
 
     return (
-        <div className="flex flex-col gap-6 items-start md:px-[12%] px-4">
+        <div className="flex flex-col gap-6 items-start md:px-[12%] px-4 pb-8 bg-tetiary dark:bg-dark">
             
             <div className="w-full py-6">
                 <h2 className="flex items-center gap-3 font-semibold md:text-[32px] text-[24px] py-4 border border-transparent border-b-gray/[0.1] dark:border-b-gray/[0.08]">Doctors</h2>
@@ -48,7 +48,7 @@ export default function Doctors() {
                 <Map />
             </div>
 
-            <div className="grid lg:grid-cols-4 sm:grid-cols-2 gap-4 w-full">
+            <div className="grid gap-4 w-full">
             {
                 loading ? 
                 <p>Loading</p>
