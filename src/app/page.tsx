@@ -1,15 +1,17 @@
 "use client"
+import CirclesIcon from "@/assets/icons/circles";
 import CircleText from "@/assets/icons/circleText";
 import Hero from "@/assets/icons/hero";
 import Button from "@/components/button/button";
-import { ArrowRight, Play } from "@phosphor-icons/react";
+import { ArrowRight, Play, Stethoscope, Storefront } from "@phosphor-icons/react";
+import { ListBullets } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
 
 export default function Home() {
   return (
     <main className="">
 
-      <header className="min-h-screen flex flex-wrap justify-between gap-8 md:px-[5%] px-4 md:py-[5%] py-12">
+      <header className="flex flex-wrap bg-slate dark:bg-slate/[0.02] justify-between gap-8 md:px-[5%] px-4 md:py-[5%] py-12">
         <div className="flex flex-col gap-6 lg:w-[52%] md:pl-6">
           <h1 className="sm:text-[48px] leading-[130%] text-[28px] font-bold mx-auto">Access Quality Healthcare from Anywhere</h1>
           <p className="mb-2">Our platform connects you with experienced doctors for online consultations, making healthcare more accessible and convenient.</p>
@@ -32,6 +34,68 @@ export default function Home() {
           {/* <Image src="/images/hero-img.webp" alt="hero-img" width={500} height={340} /> */}
         </div>
       </header>
+
+      <section className="md:px-[5%] px-4 md:py-[3%] py-6">
+        <div className="flex flex-col sm:items-center gap-4 md:pl-6">
+          <CirclesIcon className="text-primary h-[20px]" />
+          <h1 className="sm:text-[32px] leading-[130%] text-[20px] font-bold sm:mx-auto">Exploring healthcare Innovation</h1>
+          <p className="mb-2 sm:text-center">Providing quality, affordable, virtual healthcare services. Here are spotlight on key features and advances</p>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-3 sm:grid-cols-2 my-12">
+          <div className="flex flex-col gap-2">
+            <h2 className="flex items-center gap-4 font-bold text-[16px]"><Stethoscope size={20} color="red" /> Virtual Consultations</h2>
+            <p className="">Real-time secure and convenient consultaions</p>
+            <p></p>
+          </div>
+          <div className="flex flex-col gap-2">
+            <h2 className="flex items-center gap-4 font-bold text-[16px]"><ListBullets size={20} color="red" /> Electronic Prescriptions</h2>
+            <p className="">Receive prescriptions sent directly to your pharmacy</p>
+            <p></p>
+          </div>
+          <div className="flex flex-col gap-2">
+            <h2 className="flex items-center gap-4 font-bold text-[16px]"><Storefront size={20} color="red" /> Medical History Storage</h2>
+            <p className="">Securely store your medical records</p>
+            <p></p>
+          </div>
+        </div>
+
+
+        <div className="md:h-[500px] h-[300px] relative w-full sm:rounded-[40px] overflow-hidden my-6">
+          <Image src="/images/doctor-consult.jpg" alt="doctor" width={1400} height={500}/>
+        </div>
+      </section>
+
+      
+      <section className="md:px-[5%] px-4 py-6">
+        <div className="flex flex-col sm:items-center gap-4 md:pl-6">
+          <CirclesIcon className="text-red h-[20px]" />
+          <h1 className="sm:text-[32px] leading-[130%] text-[20px] font-bold sm:mx-auto">How it Works</h1>
+          <p className="mb-2 sm:text-center">Providing quality, affordable, virtual healthcare services. Here are spotlight on key features and advances</p>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-4 sm:grid-cols-2 my-12">
+          <div className="flex flex-col gap-2 font-bold">
+            <Image src="/images/fill-form.svg" alt="doctor" width={800} height={500} className=" fill-white dark:text-dark "/>
+            <p className="px-10 py-2">Fill out a brief medical history form</p>
+          </div>
+          <div className="flex flex-col gap-2 font-bold">
+            <Image src="/images/book-call.svg" alt="doctor" width={800} height={500} className=" fill-white dark:text-dark "/>
+            <p className="px-10 py-2">Book an appointment with a specialist</p>
+          </div>
+          <div className="flex flex-col gap-2 font-bold">
+            <Image src="/images/calling.svg" alt="doctor" width={800} height={500} className=" fill-white dark:text-dark "/>
+            <p className="px-10 py-2">Consult with your doctor via video</p>
+          </div>
+          <div className="flex flex-col gap-2 font-bold">
+            <Image src="/images/prescriptions.svg" alt="doctor" width={800} height={500} className=" fill-white dark:text-dark "/>
+            <p className="px-10 py-2">Receive personalized treatment plans and prescriptions</p>
+          </div>
+        </div>
+
+        <Button className="rounded-full mx-auto">Get Started</Button>
+
+      </section>
 
     </main>
   );
