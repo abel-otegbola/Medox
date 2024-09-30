@@ -1,23 +1,59 @@
 'use client'
 import LogoIcon from "@/assets/icons/logo";
 import Button from "@/components/button/button";
+import DoctorCard from "@/components/cards/doctorsCard";
+import Dropdown from "@/components/dropdown/dropdown";
 import Input from "@/components/input/input";
-import { FilePlus, Stethoscope, User, UserCheck } from "@phosphor-icons/react";
-import { useState } from "react";
+import Textarea from "@/components/textarea/textarea";
+import { ProfilesContext } from "@/context/useProfile";
+import { symptoms } from "@/data/symptoms";
+import { FilePlus, Stethoscope, Trash, User, UserCheck } from "@phosphor-icons/react";
+import { useContext, useState } from "react";
 
 export default function Checkup() {
-    const [data, setData] = useState({ condition: "", location: "",  msg: "" })
+    const [data, setData] = useState({ condition: "", fullname: "",  age: "", medicalHistory: "", symptoms: ["Headache", "Fever"] })
+    const [symptom, setSymptom] = useState("")
     const [active, setActive] = useState(0)
+    const { getAllProfiles, profiles, loading } = useContext(ProfilesContext)
 
     const handleChange = (index: string, value: string) => {
         setData({ ...data, [index]: value })
+    }
+
+    const handleNext = () => {
+        if(active === 0) {
+            if(data.condition !== "") {
+                setActive(1)
+            }
+        }
+        else if (active === 1) {
+            if(data.fullname !== "" && data.age !== "" && data.medicalHistory !== "") {
+                setActive(2)
+            }
+        }
+        else if(active === 2) {
+            setActive(3)
+            getAllProfiles()
+        }
+        else if(active === 3) {
+            setActive(4)
+        }
+    }
+
+    const addSymptom = () => {
+        if(symptom === "") {
+
+        }
+        else if(!data.symptoms.includes(symptom)) {
+            setData({ ...data, symptoms: [...data.symptoms, symptom] })
+        }
     }
 
     const flow = [
         { id: 0, icon: <User />, title: "Describe your condition", text: "Provide information on the medical condition" },
         { id: 1, icon: <Stethoscope />, title: "Quick Assessments", text: "Answer few important questions." },
         { id: 2, icon: <UserCheck />, title: "Symptoms", text: "State the symptoms you're currently experiencing." },
-        { id: 3, icon: <FilePlus />, title: "Finish", text: "Get your report and connect with our doctor." },
+        { id: 3, icon: <FilePlus />, title: "Checkup", text: "Get your report and connect with our doctor." },
     ]
 
     return (
@@ -48,7 +84,7 @@ export default function Checkup() {
                     <div className="flex-1 min-h-[400px]">
 
                         <div className="flex flex-col gap-1 items-center">
-                            <div className="flex p-8 py-6 mb-4 rounded bg-tetiary/[0.5] dark:bg-black/[0.1] text-gray">
+                            <div className="flex p-8 py-6 rounded bg-tetiary/[0.5] dark:bg-black/[0.1] text-gray">
                                 <LogoIcon width={50} height={50} className="p-3 rounded border border-primary/[0.09] bg-dark" /> 
                             </div>
                             <h2 className="font-bold text-[16px]">Checkup with Medox</h2>
@@ -80,18 +116,78 @@ export default function Checkup() {
                                 </div>
                                 
                                 <div className={`w-full absolute top-0 left-0 duration-500 ${active === 0 ? "translate-x-[120%]": active === 1 ? "translate-x-0" : "translate-x-[-120%]"}`}>
-                                    <div className="flex flex-col gap-6 w-full">
-                                        <p className="text-center">Provide these information for our records</p>
-                                        <Input className="rounded-full" placeholder="Describe the symptoms you are experiencing" />
-                                        <Input className="rounded-full" placeholder="How long have you been experiencing this symptoms" />
-                                        <Input className="rounded-full" placeholder="Any known triggers or causes" />
+                                    <div className="flex flex-col gap-4 w-full">
+                                        <p className="text-center">Administrative reports and medical history</p>
+                                        <div>
+                                            <p className="text-[12px] font-bold mb-1">Full name</p>
+                                            <Input className="rounded" placeholder="Please enter your full name" value={data.fullname} onChange={(e) => setData({ ...data, fullname: e.target.value })} />
+                                        </div>
+                                        <div>
+                                            <p className="text-[12px] font-bold mb-1">Age</p>
+                                            <Input className="rounded" placeholder="Please enter your age" type="number" value={data.age} onChange={(e) => setData({ ...data, age: e.target.value })}  />
+                                        </div>
+                                        <div>
+                                            <p className="text-[12px] font-bold mb-1">Medical History</p>
+                                            <Textarea className="rounded" placeholder="Briefly describe your medical history?" value={data.medicalHistory} onChange={(e) => setData({ ...data, medicalHistory: e.target.value })} />
+                                        </div>
                                     </div>                    
                                 </div>
                                 
                                 <div className={`w-full absolute top-0 left-0 duration-500 ${active < 2 ? "translate-x-[120%]": active === 2 ? "translate-x-0" : "translate-x-[-120%]"}`}>
                                     <div className="flex flex-col gap-6 w-full">
-                                        <p className="text-center">Symptoms</p>
-                                        <Input className="rounded-full" placeholder="Describe the symptoms you are experiencing" />
+                                        <p className="text-center">What are the health symptoms you are experiencing</p>
+                                        <div className="flex gap-2">
+                                            <Dropdown className="rounded" placeholder="Describe the symptoms you are experiencing" value={symptom} onChange={(value) => setSymptom(value)}
+                                                options={symptoms.sort((a, b) => a.description.localeCompare(b.description)).map(item => {
+                                                    return { id: item.id, title: item.description, icon: "" }
+                                                })}
+                                            />
+                                            <Button onClick={() => addSymptom()}>Add</Button>
+                                        </div>
+
+                                        <table className="table-auto sm:text-[10px] text-[10px] overflow-hidden text-left w-full min-w-[250px]">
+                                            <thead  className="border border-gray/[0.6] dark:border-gray/[0.08] ">
+                                                <tr className="bg-primary/[0.08]">
+                                                    <th className="p-2">S/N</th>
+                                                    <th className="p-2">Symptom</th>
+                                                    <th className="p-2">action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="border border-gray/[0.6] dark:border-gray/[0.08] ">
+                                                {
+                                                    data.symptoms.map((symptom: string, i:number) => (
+                                                        <tr key={i} className="font-medium">
+                                                            <td className="p-2">{i + 1}</td>
+                                                            <td className="p-2 flex-1">{symptom}</td>
+                                                            <td className="p-2"><Button variant="tetiary" onClick={() => setData({ ...data, symptoms: data.symptoms.filter(item => item !== symptom) })} className="h-[20px] px-1"><Trash /></Button></td>
+                                                        </tr>
+                                                    ))
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>                    
+                                </div>
+
+                                <div className={`w-full absolute top-0 left-0 duration-500 ${active < 3 ? "translate-x-[120%]": active === 3 ? "translate-x-0" : "translate-x-[-120%]"}`}>
+                                    <div className="flex flex-col gap-6 w-full">
+                                        <p className="text-center">Provide answers to the questions to help our doctor assist you better</p>
+                                        
+                                    </div>                    
+                                </div>
+
+                                <div className={`w-full absolute top-0 left-0 duration-500 ${active < 4 ? "translate-x-[120%]": active === 4 ? "translate-x-0" : "translate-x-[-120%]"}`}>
+                                    <div className="flex flex-col gap-6 w-full">
+                                        <p className="text-center">Choose one of the available doctors or find health centers around you</p>
+                                        <div className="grid gap-4 w-full">
+                                        {
+                                            loading ? 
+                                            <p>Loading</p>
+                                            :
+                                            profiles?.map(doctor => (
+                                                <DoctorCard key={doctor.id} doctor={doctor}/>
+                                            ))
+                                        }
+                                        </div>
                                     </div>                    
                                 </div>
                             </div>
@@ -103,7 +199,7 @@ export default function Checkup() {
                                     :
                                     <span></span>
                                 }
-                                <Button onClick={() => setActive(active + 1)} className="rounded-full">Continue</Button>
+                                <Button onClick={() => handleNext()} className="rounded-full">Continue</Button>
                             </div>
 
                         </div>

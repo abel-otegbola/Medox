@@ -1,6 +1,6 @@
 'use client'
 import Tab from "../tab/tab";
-import { House, Stethoscope, UserPlus } from "@phosphor-icons/react";
+import { House, Info, Stethoscope } from "@phosphor-icons/react";
 import { ReactNode, useContext, useState } from "react";
 import Menu from "../navMenu/navMenu";
 import Link from "next/link";
@@ -23,8 +23,8 @@ export default function Header() {
 
     const navTabs: navTab[] = [
         { id: 0, label: "Home", to: "/", icon: <House /> },
-        { id: 1, label: "Doctors", to: "/doctors", icon: <UserPlus /> },
-        { id: 2, label: "Checkup", to: "/checkup", icon: <Stethoscope /> },
+        { id: 1, label: "Checkup", to: "/checkup", icon: <Stethoscope /> },
+        { id: 2, label: "About", to: "/about", icon: <Info /> },
     ]
     
     const menuRef = useOutsideClick(setToggleMenu, false)

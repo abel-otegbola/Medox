@@ -5,6 +5,7 @@ import AuthProvider from "@/context/useAuth";
 import Footer from "@/components/footer/footer";
 import CheckDashboard from "@/components/header/checkHeader";
 import NextTopLoader from "nextjs-toploader";
+import ProfilesProvider from "@/context/useProfile";
 
 const roboto = Roboto({
   weight: ['400', '700'],
@@ -28,10 +29,12 @@ export default function RootLayout({
     <html lang="en">
         <body className={`${roboto.className} text-[14px] text-secondary dark:bg-dark dark:text-gray`}>
           <AuthProvider>
+          <ProfilesProvider>
             <NextTopLoader />
               <CheckDashboard />
               {children}
               <Footer />
+          </ProfilesProvider>
           </AuthProvider>
         </body>
     </html>
