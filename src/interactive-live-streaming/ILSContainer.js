@@ -315,7 +315,7 @@ export function ILSContainer({
   });
 
   return (
-    <div className="bg-dark">
+    <div className="bg-dark h-full">
       <div ref={containerRef} className="h-full flex flex-col bg-gray-800">
         <FlyingEmojisOverlay />
         {typeof localParticipantAllowedJoin === "boolean" ? (

@@ -35,7 +35,7 @@ export default function Meeting() {
   }, [isMobile]);
 
   return (
-    <div className="relative h-screen">
+    <div className="pb-4 h-[80vh]">
       {isMeetingStarted ? (
         <MeetingAppProvider
         >

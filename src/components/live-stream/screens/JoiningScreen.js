@@ -364,9 +364,9 @@ export function JoiningScreen({
   };
 
   return (
-    <div className="fixed inset-0">
-      <div className="overflow-y-auto flex flex-col flex-1 h-screen bg-gray-800">
-        <div className="flex flex-1 flex-col md:flex-row items-center justify-center md:m-[72px] m-16">
+    <div className="">
+      <div className="overflow-y-auto flex flex-col flex-1 bg-gray-800">
+        <div className="flex flex-1 flex-col md:flex-row items-center justify-center md:m-[12px] m-2">
           <div className="container grid  md:grid-flow-col grid-flow-row ">
             <div className="grid grid-cols-12">
               <div className="md:col-span-7 2xl:col-span-6 col-span-12">
@@ -445,7 +445,7 @@ export function JoiningScreen({
                     {!isMobile &&
                       meetingMode === Constants.modes.CONFERENCE && (
                         <div
-                          className="m-4 absolute md:left-12 lg:left-24 xl:left-44 md:right-12 lg:right-24 xl:right-44 rounded cursor-pointer bg-gray-700"
+                          className="m-4 md:left-12 lg:left-24 xl:left-44 md:right-12 lg:right-24 xl:right-44 rounded cursor-pointer bg-gray-700"
                           onClick={() => {
                             handleClickOpen();
                           }}
@@ -464,7 +464,7 @@ export function JoiningScreen({
                 </div>
               </div>
               <div className="md:col-span-5 2xl:col-span-6 col-span-12 md:relative">
-                <div className="flex flex-1 flex-col items-center justify-center xl:m-16 lg:m-6 md:mt-9 lg:mt-14 xl:mt-20 mt-3 md:absolute md:left-0 md:right-0 md:top-0 md:bottom-0">
+                <div className="flex flex-1 flex-col items-center justify-center xl:m-16 lg:m-6 md:mt-9 lg:mt-14 xl:mt-20 mt-3 m-4 md:absolute md:left-0 md:right-0 md:top-0 md:bottom-0">
                   <MeetingDetailsScreen
                     participantName={participantName}
                     setParticipantName={setParticipantName}

@@ -1,6 +1,9 @@
 import { CheckIcon, ClipboardIcon } from "@heroicons/react/outline";
 import { Constants } from "@videosdk.live/react-sdk";
 import React, { useState } from "react";
+import Button from "../button/button";
+import Input from "../input/input";
+import { ArrowLeft } from "@phosphor-icons/react";
 
 export function MeetingDetailsScreen({
   onClickJoin,
@@ -21,14 +24,14 @@ export function MeetingDetailsScreen({
 
   return (
     <div
-      className={`flex flex-1 flex-col justify-center w-full md:p-[6px] sm:p-1 p-1.5`}
+      className={`flex flex-1 flex-col justify-center w-full md:p-[6px] sm:p-2 p-4`}
     >
       {iscreateMeetingClicked ? (
-        <div className="border border-solid border-gray-400 rounded-xl px-4 py-3  flex items-center justify-center">
-          <p className="text-white text-base">{`Studio code : ${studioCode}`}</p>
+        <div className="border border-solid border-primary text-primary rounded-full px-3 py-2  flex items-center justify-center">
+          <p className="text-base">{`Studio code : ${studioCode}`}</p>
           <button
             className="ml-2"
-            onClick={() => {
+            onClick={() => { 
               navigator.clipboard.writeText(studioCode);
               setIsCopied(true);
               setTimeout(() => {
@@ -39,70 +42,73 @@ export function MeetingDetailsScreen({
             {isCopied ? (
               <CheckIcon className="h-5 w-5 text-green-400" />
             ) : (
-              <ClipboardIcon className="h-5 w-5 text-white" />
+              <ClipboardIcon className="h-5 w-5 text-primary" />
             )}
           </button>
         </div>
       ) : isJoinMeetingClicked ? (
         <>
-          <input
+          <Button variant="tetiary" className="mb-6 px-2 py-1 rounded-full" onClick={() => setIsJoinMeetingClicked(false)}>
+            <ArrowLeft size={20} color="gray" />
+          </Button>
+          <Input
             defaultValue={studioCode}
+            error={studioCodeError && "Please enter valid studioCode"}
             onChange={(e) => {
               setStudioCode(e.target.value);
             }}
             placeholder={"Enter studio code"}
-            className="px-4 py-3 bg-gray-650 rounded-xl text-white w-full text-center"
+            className="rounded-full w-full"
           />
-          {studioCodeError && (
-            <p className="text-xs text-red-600">
-              Please enter valid studioCode
-            </p>
-          )}
+         
         </>
       ) : null}
 
       {(iscreateMeetingClicked || isJoinMeetingClicked) && (
-        <>
-          <input
-            value={participantName}
-            onChange={(e) => setParticipantName(e.target.value)}
-            placeholder="Enter your name"
-            className="px-4 py-3 mt-5 bg-gray-650 rounded-xl text-white w-full text-center"
-          />
-          <button
-            disabled={participantName.length < 3}
-            className={`w-full ${
-              participantName.length < 3 ? "bg-gray-650" : "bg-purple-350"
-            }  text-white px-2 py-3 rounded-xl mt-5`}
-            onClick={() => {
-              if (iscreateMeetingClicked) {
-                if (videoTrack) {
-                  videoTrack.stop();
-                  setVideoTrack(null);
+        <div>
+          <div className="flex flex-col gap-5 my-5">
+            <Input
+              value={participantName}
+              onChange={(e) => setParticipantName(e.target.value)}
+              placeholder="Enter your name"
+              className="rounded-full"
+            />
+            <Button
+              disabled={participantName.length < 3}
+              className={`w-full ${
+                participantName.length < 3 ? "bg-primary" : "bg-primary"
+              } rounded-full`}
+              onClick={() => {
+                if (iscreateMeetingClicked) {
+                  if (videoTrack) {
+                    videoTrack.stop();
+                    setVideoTrack(null);
+                  }
+                  onClickStartMeeting();
+                } else {
+                  if (studioCode.match("\\w{4}\\-\\w{4}\\-\\w{4}")) {
+                    onClickJoin(studioCode);
+                  } else setStudioCodeError(true);
                 }
-                onClickStartMeeting();
-              } else {
-                if (studioCode.match("\\w{4}\\-\\w{4}\\-\\w{4}")) {
-                  onClickJoin(studioCode);
-                } else setStudioCodeError(true);
-              }
-            }}
-          >
-            {iscreateMeetingClicked
-              ? "Start a meeting"
-              : isJoinMeetingClicked &&
-                meetingMode === Constants.modes.CONFERENCE
-              ? "Join Studio"
-              : "Join Streaming Room"}
-          </button>
-        </>
+              }}
+            >
+              {iscreateMeetingClicked
+                ? "Start a meeting"
+                : isJoinMeetingClicked &&
+                  meetingMode === Constants.modes.CONFERENCE
+                ? "Join Studio"
+                : "Join Streaming Room"}
+            </Button>
+          </div>
+        </div>
       )}
 
       {!iscreateMeetingClicked && !isJoinMeetingClicked && (
         <div className="w-full md:mt-0 mt-4 flex flex-col">
           <div className="flex items-center justify-center flex-col w-full">
-            <button
-              className="w-full bg-purple-350 text-white px-2 py-3 rounded-xl"
+            <Button
+              size="full"
+              className="rounded-full"
               onClick={async () => {
                 const studioCode = await _handleOnCreateMeeting();
                 setStudioCode(studioCode);
@@ -111,26 +117,30 @@ export function MeetingDetailsScreen({
               }}
             >
               Create a meeting
-            </button>
+            </Button>
 
-            <button
-              className="w-full bg-purple-350 text-white px-2 py-3 mt-5 rounded-xl"
+            <Button
+              size="full"
+              variant="secondary"
+              className="w-full mt-5 rounded-full"
               onClick={async () => {
                 setIsJoinMeetingClicked(true);
                 setMeetingMode(Constants.modes.CONFERENCE);
               }}
             >
               Join as a Host
-            </button>
-            <button
-              className="w-full bg-gray-650 text-white px-2 py-3 rounded-xl mt-5"
+            </Button>
+            <Button
+              size="full"
+              variant="tetiary"
+              className="rounded-full mt-5"
               onClick={() => {
                 setIsJoinMeetingClicked(true);
                 setMeetingMode(Constants.modes.VIEWER);
               }}
             >
               Join as a Viewer
-            </button>
+            </Button>
           </div>
         </div>
       )}
