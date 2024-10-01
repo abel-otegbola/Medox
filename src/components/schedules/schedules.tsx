@@ -1,5 +1,6 @@
 import { ScheduleData, Value } from "@/interface/schedule";
 import ScheduleGrid from "../scheduleGrid/scheduleGrid";
+import moment from 'moment'
 
 type ScheduleLayoutProps = {
     schedules: ScheduleData[],
@@ -8,8 +9,10 @@ type ScheduleLayoutProps = {
 }
 
 export default function SchedulesLayout({ schedules, value, layout }: ScheduleLayoutProps) {
-
-    const dateValue = value?.toLocaleString().split(",")[0] || ""
+    // const dateValue = (date: Date, index: number) => {
+    //     const format = date.setUTCDate(date.getUTCDate())
+    //     return format?.toLocaleString().split(",")[0] || ""
+    // }
 
     return (
         <div className="p-4 bg-white dark:bg-dark">
@@ -23,8 +26,8 @@ export default function SchedulesLayout({ schedules, value, layout }: ScheduleLa
                                     <tr className="text-[12px] p-4">
                                         <th className="text-center"></th>
                                         {
-                                            [(+dateValue.split("/")[1])-1, dateValue.split("/")[1], (+dateValue.split("/")[1])+1, (+dateValue.split("/")[1])+2, (+dateValue.split("/")[1])+3, (+dateValue.split("/")[1])+4].map(date => (
-                                            <th key={date} className={`min-w-[100px] py-2 rounded ${value?.toLocaleString().split(",")[0].split("/")[1] === date ? "bg-red text-white" : ""}`}>{date}</th> 
+                                            [moment(value?.toString()).subtract(2, 'days'), moment(value?.toString()).subtract(1, 'days'), moment(value?.toString()), moment(value?.toString()).add(1, 'days'), moment(value?.toString()).add(2, 'days'), moment(value?.toString()).add(3, 'days')].map(date => (
+                                            <th key={date.date()} className={`min-w-[100px] py-2 rounded ${moment(value?.toString()) === date ? "bg-red text-white" : ""}`}>{date.date()}</th> 
                                             ))
                                         }
                                     </tr>
@@ -36,10 +39,10 @@ export default function SchedulesLayout({ schedules, value, layout }: ScheduleLa
                                             <td className="px-2 flex h-full w-full">{date > 9 ? "" : "0"}{date}:00</td>
                                             
                                             {
-                                                [ -1, 0, 1, 2, 3, 4].map(index => (
-                                                    <td key={index} className="p-[2px] border border-gray/[0.5] dark:border-gray/[0.07] relative">
+                                                [moment(value?.toString()).subtract(2, 'days'), moment(value?.toString()).subtract(1, 'days'), moment(value?.toString()), moment(value?.toString()).add(1, 'days'), moment(value?.toString()).add(2, 'days'), moment(value?.toString()).add(3, 'days')].map(index => (
+                                                    <td key={index.date()} className="p-[2px] border border-gray/[0.5] dark:border-gray/[0.07] relative">
                                                         {
-                                                            schedules.filter(item => (item.duration.split(":")[0] === `${date > 9 ? "" : "0"}${date}` && new Date(item.date).getDate() === new Date().getDate() + index)).map(element => (
+                                                            schedules.filter(item => (item.durationStart.split(":")[0] === `${date > 9 ? "" : "0"}${date}` && item.date.split("-")[2] === `${index.date() > 9 ? "" : "0"}${index.date().toString()}`)).map(element => (
                                                                 <ScheduleGrid key={element.id} element={element} layout={layout} />
                                                             ))
                                                         }

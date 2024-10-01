@@ -1,9 +1,11 @@
-import { createContext, ReactNode, useContext, useState } from "react"
+"use client"
+import { createContext, ReactNode, useContext, useEffect, useState } from "react"
 import { addDoc, AddPrefixToKeys, collection, doc, getDocs, query, updateDoc, where } from "firebase/firestore"
 import { db } from "../firebase/firebase"
 import { useLocalStorage } from "@/customHooks/useLocaStorage";
 import { AuthContext } from "./useAuth";
 import { ScheduleData } from "@/interface/schedule";
+import toast, { Toaster } from "react-hot-toast";
 
 
 type values = {
@@ -60,7 +62,7 @@ export default function SchedulesProvider({ children }: { children: ReactNode}) 
         setLoading(true)
         try {
             const arr: {id: string}[] = []
-            const querySnapshot = await getDocs(query(collection(db, "schedules"), where("user", "==", user?.email)));
+            const querySnapshot = await getDocs(query(collection(db, "schedules"), where("patient", "==", user?.email)));
             querySnapshot.forEach((doc) => {
                 arr.push({...doc.data(), id: doc.id})
             })
@@ -75,8 +77,22 @@ export default function SchedulesProvider({ children }: { children: ReactNode}) 
         }
     }
 
+    useEffect(() => {
+        getAllSchedules()
+    },[]) // eslint-disable-line react-hooks/exhaustive-deps
+
+    useEffect(() => {
+        if (popup?.type === "success") {
+            toast.success(popup.msg)
+        }
+        if (popup?.type === "error") {
+            toast.error(popup.msg);
+        }
+      }, [popup]);
+
     return (
         <SchedulesContext.Provider value={{ schedules, popup, setPopup, loading, addSchedule, getAllSchedules, updateSchedule }}>
+            <Toaster containerClassName="p-8" />
             { children }
         </SchedulesContext.Provider>
     )

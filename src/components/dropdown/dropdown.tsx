@@ -5,7 +5,7 @@ import { ReactNode, useRef, useState } from "react";
 
 type option = {
   id: string | number;
-  icon: ReactNode;
+  icon?: ReactNode;
   title: string;
 }
 

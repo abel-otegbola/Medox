@@ -1,12 +1,15 @@
 export interface ScheduleData {
-    [x: string]: string,
+    [x: string]: string | undefined,
     id: string,
     title: string,
-    duration: string,
+    durationStart: string,
+    durationEnd: string,
     date: string,
-    createdAt: string,
-    updatedAt: string,
-    status: "Completed" | "Upcoming" | "On-hold" | "Pending",
+    patient?: string,
+    doctor?: string,
+    createdAt?: string;
+    updatedAt?: string;
+    status: string,
     description: string,
 }
 

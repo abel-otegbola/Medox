@@ -23,9 +23,9 @@ export default function Button({ variant, className, href, size, disabled, onCli
     return (
         <button className={`rounded-[4px] h-[40px] p-[12px_32px] flex items-center justify-center
             ${variants[variant || "primary"]}
-            ${className} 
             ${disabled ? "opacity-[0.25]" : ""}
             ${size === "full" ? "w-full" : "w-fit"}
+            ${className} 
         `}
         {...props}
         disabled={disabled}

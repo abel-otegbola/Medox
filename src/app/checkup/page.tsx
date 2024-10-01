@@ -2,6 +2,7 @@
 import LogoIcon from "@/assets/icons/logo";
 import Button from "@/components/button/button";
 import DoctorCard from "@/components/cards/doctorsCard";
+import Chat from "@/components/chat/chat";
 import Dropdown from "@/components/dropdown/dropdown";
 import Input from "@/components/input/input";
 import Textarea from "@/components/textarea/textarea";
@@ -10,8 +11,10 @@ import { symptoms } from "@/data/symptoms";
 import { FilePlus, Stethoscope, Trash, User, UserCheck } from "@phosphor-icons/react";
 import { useContext, useState } from "react";
 
+export interface dataProps { condition: string, fullname: string,  location: string, medicalHistory: string, symptoms: string[] }
+
 export default function Checkup() {
-    const [data, setData] = useState({ condition: "", fullname: "",  age: "", medicalHistory: "", symptoms: ["Headache", "Fever"] })
+    const [data, setData] = useState<dataProps>({ condition: "", fullname: "",  location: "", medicalHistory: "", symptoms: ["Headache", "Fever"] })
     const [symptom, setSymptom] = useState("")
     const [active, setActive] = useState(0)
     const { getAllProfiles, profiles, loading } = useContext(ProfilesContext)
@@ -27,7 +30,7 @@ export default function Checkup() {
             }
         }
         else if (active === 1) {
-            if(data.fullname !== "" && data.age !== "" && data.medicalHistory !== "") {
+            if(data.fullname !== "" && data.location !== "" && data.medicalHistory !== "") {
                 setActive(2)
             }
         }
@@ -123,8 +126,8 @@ export default function Checkup() {
                                             <Input className="rounded" placeholder="Please enter your full name" value={data.fullname} onChange={(e) => setData({ ...data, fullname: e.target.value })} />
                                         </div>
                                         <div>
-                                            <p className="text-[12px] font-bold mb-1">Age</p>
-                                            <Input className="rounded" placeholder="Please enter your age" type="number" value={data.age} onChange={(e) => setData({ ...data, age: e.target.value })}  />
+                                            <p className="text-[12px] font-bold mb-1">Location</p>
+                                            <Input className="rounded" placeholder="Please enter your address" type="text" value={data.location} onChange={(e) => setData({ ...data, location: e.target.value })}  />
                                         </div>
                                         <div>
                                             <p className="text-[12px] font-bold mb-1">Medical History</p>
@@ -170,9 +173,11 @@ export default function Checkup() {
 
                                 <div className={`w-full absolute top-0 left-0 duration-500 ${active < 3 ? "translate-x-[120%]": active === 3 ? "translate-x-0" : "translate-x-[-120%]"}`}>
                                     <div className="flex flex-col gap-6 w-full">
-                                        <p className="text-center">Provide answers to the questions to help our doctor assist you better</p>
-                                        
-                                    </div>                    
+                                        <p className="text-center">Here are health centers close to your location.</p>
+                                    <div>
+                                    <Chat data={data} />
+                                    </div>
+                                    </div>
                                 </div>
 
                                 <div className={`w-full absolute top-0 left-0 duration-500 ${active < 4 ? "translate-x-[120%]": active === 4 ? "translate-x-0" : "translate-x-[-120%]"}`}>

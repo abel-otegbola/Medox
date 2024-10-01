@@ -6,7 +6,7 @@ import { dateParser } from "@/helpers/dateParser";
 import { useOutsideClick } from "@/helpers/useClickOutside"
 import { ScheduleData, Value } from "@/interface/schedule";
 import { Calendar as CalendarIcon, GridFour, List, X } from "@phosphor-icons/react"
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import Calendar from "react-calendar";
 
 export default function SchedulesPage() {
@@ -24,6 +24,10 @@ export default function SchedulesPage() {
         { id: 1, icon: <GridFour />, title: "Grid"},
         { id: 2, icon: <List />, title: "List"},
     ]
+
+    useEffect(() => {
+        console.log(schedules)
+    }, [schedules])
 
     const calendarRef = useOutsideClick(setOpenCalendar, false)
 
@@ -76,11 +80,11 @@ export default function SchedulesPage() {
                             </div>
 
                             {/* add new schedule toggle button */}
-                            <button 
-                                className="p-3 px-6 bg-green-600 rounded-full shadow-md text-white" 
-                                onClick={() => setOpenNewSchedule(!openNewSchedule)}>
-                                {openNewSchedule ? "Close" : "Add new"}
-                            </button>
+                            <Button
+                                className="p-3 px-6 shadow-md" 
+                                href="/doctor"
+                            >Add new
+                            </Button>
                         </div>
                     </div>
 

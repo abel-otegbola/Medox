@@ -3,6 +3,7 @@ import OverviewChart from "@/components/charts/overview"
 import SchedulesLayout from "@/components/schedules/schedules"
 import { PatientsTable } from "@/components/tables/patientsTable"
 import { AuthContext } from "@/context/useAuth"
+import { SchedulesContext } from "@/context/useSchedule"
 import { Calendar, ChartBar, UserPlus } from "@phosphor-icons/react"
 import Link from "next/link"
 import { useContext } from "react"
@@ -10,6 +11,7 @@ import { useContext } from "react"
 
 export default function Dashboard() {
     const { user } = useContext(AuthContext)
+    const { schedules } = useContext(SchedulesContext);
 
     const data = [
         {  "id": "0", "name": "Adam Messi", "age": "26", "sex": "Male", "ward no": "#123456", "priority": "Medium", "start date": "June, 3, 2024", "end date": "-- --"},
@@ -71,7 +73,7 @@ export default function Dashboard() {
                     <Link href="/dashboard/schedules" className="text-[10px] text-primary px-2 font-bold underline">See All</Link>
                 </div>
                 
-                <SchedulesLayout schedules={[]} value={new Date()} layout={"Calendar"} />
+                <SchedulesLayout schedules={schedules} value={new Date()} layout={"Calendar"} />
             </div>
         </div>
     )

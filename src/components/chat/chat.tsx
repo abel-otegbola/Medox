@@ -1,4 +1,5 @@
 "use client"
+import { dataProps } from "@/app/checkup/page"
 import LogoIcon from "@/assets/icons/logo"
 import Button from "@/components/button/button"
 import Input from "@/components/input/input"
@@ -6,17 +7,32 @@ import { askGemini } from "@/utils/geminiApi"
 import { PaperPlaneTilt, User } from "@phosphor-icons/react"
 import Markdown from "markdown-to-jsx"
 import { nanoid } from "nanoid"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { LoaderIcon } from "react-hot-toast"
 
-export default function Chat() {
+export default function Chat({ data }: { data: dataProps }) {
     const [prompts, setPrompts] = useState<{ type: "bot" | "user", id: string, result: string }[]>([])
     const [loading, setLoading] = useState(false)
+    const [newPrompt, setNewPrompt] = useState("")
 
     
-    const promptBot = () => {
+    const startBot = () => {
         setLoading(true)
-        askGemini(`Hello! As an Ai support, I want to diagnose a patient after which i will connect the patient to a doctor. the patient health condition which is, and currently reside in region. Inform of an interview with the patient to get all necessary information before connecting with the doctor.`)
+        askGemini(`Hello! my name is ${data.fullname} I have this conditions: ${data.condition}, my medical history is ${data.medicalHistory} and these symptoms: ${data.symptoms}. I currently reside in ${data.location} region. Give me a short diagnosis with each possible conditions having probability. Also provide health care centers i can visit based on my location.`)
+        .then(result => {
+            setPrompts([ { type: "bot", id: nanoid(5), result } ])
+            setLoading(false)
+        })
+        .catch(error => {
+            console.log(error)
+            setLoading(false)
+        })
+    }
+        
+    const promptBot = () => {
+        setNewPrompt("")
+        setLoading(true)
+        askGemini(newPrompt)
         .then(result => {
             setPrompts([ { type: "bot", id: nanoid(5), result } ])
             setLoading(false)
@@ -27,6 +43,9 @@ export default function Chat() {
         })
     }
 
+    useEffect(() => {
+        startBot()
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div>
@@ -53,7 +72,7 @@ export default function Chat() {
             </div>
 
             <div className="flex items-end mx-auto w-full gap-2 p-1 bg-white dark:bg-dark border border-primary/[0.2] rounded-full">
-                <Input name="message" className="border-none rounded-full shadow-none" placeholder="Write a message here..." type="text" error=""/>
+                <Input name="message" className="border-none rounded-full shadow-none" value={newPrompt} onChange={(e) => setNewPrompt(e.target.value)} placeholder="Write a message here..." type="text" error=""/>
                 <Button className="rounded-full gap-2 px-3" onClick={() => promptBot()}><PaperPlaneTilt size={16} /></Button>
             </div>
         </div>
