@@ -3,7 +3,8 @@ import CirclesIcon from "@/assets/icons/circles";
 import CircleText from "@/assets/icons/circleText";
 import Hero from "@/assets/icons/hero";
 import Button from "@/components/button/button";
-import { ArrowRight, Play, Stethoscope, Storefront } from "@phosphor-icons/react";
+import { useOutsideClick } from "@/helpers/useClickOutside";
+import { ArrowRight, Play, Stethoscope, Storefront, X } from "@phosphor-icons/react";
 import { ListBullets } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
 import { useState } from "react";
@@ -11,6 +12,8 @@ import ReactPlayer from "react-player";
 
 export default function Home() {
   const [openVideo, setOpenVideo] = useState(false)
+
+  const modalRef = useOutsideClick(setOpenVideo, false)
 
   return (
     <main className="">
@@ -27,8 +30,11 @@ export default function Home() {
             </button>
             {
               openVideo ? 
-              <div className="fixed top-0 left-0 w-full h-screen">
-                <ReactPlayer url="https://youtu.be/7wM82x3yXFE" />
+              <div className="fixed top-0 left-0 w-full h-screen bg-dark/[0.6] flex flex-col gap-4 justify-center items-center z-[120]">
+                <div ref={modalRef} className="flex flex-col gap-4 md:w-[50%] w-[90%]">
+                  <Button variant="tetiary" className="px-3 py-1 bg-dark" onClick={() => setOpenVideo(false)}><X /></Button>
+                  <ReactPlayer url="https://youtu.be/7wM82x3yXFE" width={"100%"} />
+                </div>
               </div>
               : ""
             }
