@@ -6,8 +6,12 @@ import Button from "@/components/button/button";
 import { ArrowRight, Play, Stethoscope, Storefront } from "@phosphor-icons/react";
 import { ListBullets } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
+import { useState } from "react";
+import ReactPlayer from "react-player";
 
 export default function Home() {
+  const [openVideo, setOpenVideo] = useState(false)
+
   return (
     <main className="">
 
@@ -17,10 +21,17 @@ export default function Home() {
           <p className="mb-2">Our platform connects you with experienced doctors for online consultations, making healthcare more accessible and convenient.</p>
           <div className="flex gap-6 items-center">
             <Button href="/checkup" className="gap-4 pr-6 rounded-full py-6">Get Started<ArrowRight size={16} /> </Button>
-            <div className="flex relative h-[65px] w-[65px] items-center justify-center">
+            <button className="flex relative h-[65px] w-[65px] items-center justify-center" onClick={() => setOpenVideo(!openVideo)}>
               <CircleText width={65} height={65} className="animate-spin-slow absolute top-0 left-0"/>
               <Play weight="fill" size={24} className="text-primary cursor-pointer z-[2]"/>
-            </div>
+            </button>
+            {
+              openVideo ? 
+              <div className="fixed top-0 left-0 w-full h-screen">
+                <ReactPlayer url="https://youtu.be/7wM82x3yXFE" />
+              </div>
+              : ""
+            }
           </div>
           <div className="flex items-center gap-4 mt-2 -mb-3 pt-4 border border-transparent border-t-primary/[0.1]">
             <Image src="/images/avatars.webp" alt="avatars" width={100} height={50} />

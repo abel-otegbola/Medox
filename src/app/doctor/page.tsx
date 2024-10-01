@@ -19,32 +19,7 @@ export default function Doctors() {
         if(profiles.length < 0) {
             getAllProfiles()
         }
-    }, [profiles, getAllProfiles])
-
-    // useEffect(() => {
-    //     setLoading(true)
-    //     // npiregistry.cms.hhs.gov/api/?version=2.1
-    //     axios.get(`https://clinicaltables.nlm.nih.gov/api/npi_org/v3/search?terms=${search}&count=20`)
-    //     .then(res => {
-    //         const data = res.data[3]
-    //         const doctors = data.map((item: string[]) => {
-    //             return {
-    //                 id: item[1],
-    //                 img: "/images/doctor.jpg",
-    //                 name: item[0],
-    //                 available: true,
-    //                 expertise: [ item[2] ],
-    //                 address: item[3]
-    //             }
-    //         })
-    //         setDoctors(doctors)
-    //         setLoading(false)
-    //     })
-    //     .catch(error => {
-    //         console.log(error)
-    //         setLoading(false)
-    //     })
-    // }, [search])
+    }, [profiles]) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className="flex flex-col items-start md:px-[7%] px-4 pb-8 bg-tetiary dark:bg-dark">
